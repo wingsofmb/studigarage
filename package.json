@@ -44,6 +44,6 @@
     "typescript": "~5.0.3"
   },
   "lint-staged": {
-    "**/*": "npm run _:lint --"
+    "*.{js,ts,html}": "npm run _:lint --"
   }
 }
