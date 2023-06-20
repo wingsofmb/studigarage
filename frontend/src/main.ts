@@ -4,7 +4,8 @@ import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 bootstrapApplication(AppComponent, {
-  providers: [provideRouter([]), provideAnimations()],
+  providers: [provideRouter([]), 
+  provideAnimations()],
 }).catch((e) => {
   console.error(e);
 });
