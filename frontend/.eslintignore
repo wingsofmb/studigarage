@@ -1,8 +1,13 @@
 # don't lint sources
 node_modules
 
+# don't lint config
+.vscode
+.angular
+
 # don't lint generated files
 dist
+--fix
 
 # don't lint imported libs
 src/assets/**/*.js

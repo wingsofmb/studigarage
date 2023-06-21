@@ -13,8 +13,8 @@
   "scripts": {
     "_:lint": "npm run _:lint --prefix frontend",
     "lint": "npm run lint --prefix frontend",
-    "prepare": "husky install",
     "precommit": "lint-staged && yarn workspaces run precommit",
+    "prepare": "husky install",
     "yarn": "yarn install --frozen-lockfile"
   },
   "husky": {
@@ -28,6 +28,7 @@
     "prettier": "2.8.8"
   },
   "lint-staged": {
-    "*.{js,ts,html}": "npm run _:lint --"
+    "*.{js,ts,html,css,scss,sass}": "npm run _:lint --",
+    "*.{css,scss,sass}": "npm run _:lint --"
   }
 }

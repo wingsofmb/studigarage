@@ -2,18 +2,20 @@
   "name": "studifront",
   "version": "1.0.0",
   "scripts": {
-    "_:lint": "eslint --ext .ts,.js,.html",
-    "ng": "ng",
-    "start": "ng serve",
+    "_:lint": "npm run _:eslint && npm run _:stylelint",
+    "_:eslint": "eslint --ext .ts,.js,.html",
+    "_:stylelint": "stylelint",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "clean": "npm run clean:dist && npm run clean:yarn",
     "clean:dist": "(npm run rimraf dist || true)",
     "clean:yarn": "(npm run rimraf node_modules || true)",
-    "test": "ng test",
-    "yarn": "yarn install --frozen-lockfile",
+    "clean": "npm run clean:dist && npm run clean:yarn",
+    "lint": "npm run _:eslint -- --cache --fix . && npm run _:stylelint -- **/*.{css,sass,scss}",
+    "ng": "ng",
     "nglint": "ng lint",
-    "lint": "npm run _:lint -- --cache --fix ."
+    "serve": "ng serve",
+    "test": "ng test",
+    "watch": "ng build --watch --configuration development",
+    "yarn": "yarn install --frozen-lockfile"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +54,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "stylelint": "^15.8.0",
+    "stylelint-config-standard": "^33.0.0",
+    "stylelint-config-standard-scss": "^9.0.0",
     "typescript": "5.0.4"
   }
 }

@@ -1,7 +1,8 @@
 # Ignore artifacts:
-frontend/dist
-frontend/.angular
-frontend/coverage
+dist
+.angular
+coverage
+--fix
 
 # Ignore all HTML files:
 *.html
