@@ -1,0 +1,8 @@
+# don't lint sources
+node_modules
+
+# don't lint generated files
+dist
+
+# don't lint imported libs
+src/assets/**/*.js
