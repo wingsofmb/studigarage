@@ -42,6 +42,7 @@ build/Release
 # Dependency directories
 node_modules/
 frontend/node_modules/
+backend/node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -92,7 +93,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-frontend/dist
 
 # Gatsby files
 .cache/
@@ -139,12 +139,7 @@ frontend/dist
 frontend/tmp
 frontend/out-tsc
 frontend/bazel-out
-
-# Node
-/node_modules
-/frontend/node_modules
-npm-debug.log
-yarn-error.log
+backend/dist
 
 # IDEs and editors
 .idea/
@@ -162,6 +157,12 @@ frontend.vscode/*
 !frontend/.vscode/launch.json
 !frontend/.vscode/extensions.json
 frontend/.history/*
+backend.vscode/*
+!backend/.vscode/settings.json
+!backend/.vscode/tasks.json
+!backend/.vscode/launch.json
+!backend/.vscode/extensions.json
+backend/.history/*
 
 # Miscellaneous
 frontend/.angular/cache
@@ -175,5 +176,7 @@ frontend/typings
 # System files
 .DS_Store
 frontend/.DS_Store
+backend/.DS_Store
 Thumbs.db
 frontend/Thumbs.db
+backend/Thumbs.db

@@ -1,6 +1,7 @@
 {
   "private": true,
   "name": "studigarage",
+  "license": "GPL-3",
   "workspaces": {
     "packages": [
       "frontend",
@@ -11,8 +12,8 @@
     "node": "18"
   },
   "scripts": {
-    "_:lint": "npm run _:lint --prefix frontend",
-    "lint": "npm run lint --prefix frontend",
+    "_:lint": "yarn workspaces run _:lint",
+    "lint": "yarn workspaces run lint",
     "precommit": "lint-staged && yarn workspaces run precommit",
     "prepare": "husky install",
     "yarn": "yarn install --frozen-lockfile"
@@ -28,7 +29,8 @@
     "prettier": "2.8.8"
   },
   "lint-staged": {
-    "*.{js,ts,html,css,scss,sass}": "npm run _:lint --",
-    "*.{css,scss,sass}": "npm run _:lint --"
+    "backend/**/*.{js,ts,html}": "yarn workspace studiback run _:lint --",
+    "frontend/**/*.{js,ts,html}": "yarn workspace studifront run _:lint --",
+    "frontend/**/*.{css,scss,sass}": "yarn workspace studifront run _:lint --"
   }
 }
