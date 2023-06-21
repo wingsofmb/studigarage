@@ -1,6 +1,7 @@
 {
   "name": "studifront",
   "version": "1.0.0",
+  "license": "GPL-3",
   "scripts": {
     "_:lint": "npm run _:eslint && npm run _:stylelint",
     "_:eslint": "eslint --ext .ts,.js,.html",
