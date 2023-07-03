@@ -35,14 +35,11 @@ $ yarn install
 ## Running the app
 
 ```bash
-# development
-$ yarn run start
-
 # watch mode
-$ yarn run start:dev
+$ yarn run serve:dev
 
 # production mode
-$ yarn run start:prod
+$ yarn run serve:prod
 ```
 
 ## Test

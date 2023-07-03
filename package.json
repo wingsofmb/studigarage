@@ -13,6 +13,9 @@
   },
   "scripts": {
     "_:lint": "yarn workspaces run _:lint",
+    "init:db": "yarn workspace studiback run init:db",
+    "serve:back": "yarn workspace studiback run serve",
+    "serve:back:debug": "yarn workspace studiback run serve:debug",
     "lint": "yarn workspaces run lint",
     "precommit": "lint-staged && yarn workspaces run precommit",
     "prepare": "husky install",
@@ -24,6 +27,7 @@
     }
   },
   "devDependencies": {
+    "chalk": "^4.1.2",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "2.8.8"
