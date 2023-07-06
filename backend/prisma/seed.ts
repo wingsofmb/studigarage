@@ -7,6 +7,15 @@ const userData: Prisma.UserCreateInput[] = [
     firstName: 'AdminFirstName',
     lastName: 'AdminLadtName',
     email: 'admin@studigarage.io',
+    saltedPassword: 'password1',
+    role: 'ADMIN',
+  },
+  {
+    firstName: 'Arnaud',
+    lastName: 'Arditig',
+    email: 'a.a@studigarage.io',
+    saltedPassword: 'password2',
+    role: 'EMPLOYEE',
   },
 ];
 

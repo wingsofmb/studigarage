@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { CreateUserInputDto, UpdateUserInputDto } from 'src/topics/user/dto/user.dto';
+import { CreateUserInputDto, UpdateUserInputDto, userSecretFields } from 'src/topics/user/dto/user.dto';
+import _ from 'lodash';
 
 @Injectable()
 export class UserService {
@@ -11,21 +12,32 @@ export class UserService {
     return this.prismaService.user.findUnique({ where: { id } });
   }
 
+  public async fetchUsersByEmail(email: string): Promise<User> {
+    return this.prismaService.user.findUnique({ where: { email } });
+  }
+
   public async fetchUsers(): Promise<User[]> {
     return this.prismaService.user.findMany();
   }
 
   public async createUser(requestBody: CreateUserInputDto): Promise<User> {
-    return this.prismaService.user.create({ data: requestBody });
+    const saltedPassword = requestBody.password; // TODO improve
+    const data = {
+      saltedPassword,
+      ..._.omit(requestBody, 'password'),
+    };
+    const createdUser = this.prismaService.user.create({ data });
+    return _.omit(createdUser, userSecretFields);
   }
 
   public async updateUser(id: number, requestBody: UpdateUserInputDto): Promise<User> {
     await this.prismaService.user.findUniqueOrThrow({ where: { id } });
 
-    return this.prismaService.user.update({
+    const updatedUser = this.prismaService.user.update({
       where: { id },
       data: requestBody,
     });
+    return _.omit(updatedUser, userSecretFields);
   }
 
   public async deleteUser(id: number): Promise<User> {
