@@ -7,14 +7,14 @@ const userData: Prisma.UserCreateInput[] = [
     firstName: 'AdminFirstName',
     lastName: 'AdminLadtName',
     email: 'admin@studigarage.io',
-    saltedPassword: 'password1',
+    saltedPassword: '$2b$10$zVE5hN/C9cM9lPHqmoLR6.DZryv5.SR4vCcoHQ0o0FKw0q9PLKpnS', // 'P@ssword1',
     role: 'ADMIN',
   },
   {
     firstName: 'Arnaud',
     lastName: 'Arditig',
     email: 'a.a@studigarage.io',
-    saltedPassword: 'password2',
+    saltedPassword: '$2b$10$RybFoRKN8kNp2J3TD3X18OBUZYUCsuTmeC9xTsifIAaiy6NhWOkTq', // 'P@ssword2',
     role: 'EMPLOYEE',
   },
 ];

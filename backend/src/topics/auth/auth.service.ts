@@ -3,16 +3,19 @@ import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
 import { GetProdileOutputDto } from 'src/topics/auth/dto/auth.dto';
 import { UserService } from 'src/topics/user/user.service';
+import { PasswordService } from 'src/topics/auth/password.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UserService, private jwtService: JwtService) {}
+  constructor(private usersService: UserService, private jwtService: JwtService, private passwordService: PasswordService) {}
 
   async signIn(email: string, pass: string): Promise<{ access_token: string }> {
     const user = await this.usersService.fetchUsersByEmail(email);
-    if (user?.saltedPassword !== pass) {
-      throw new UnauthorizedException();
-    }
+    if (!user) throw new UnauthorizedException();
+
+    const isPasswordValid = await this.passwordService.validatePassword(pass, user.saltedPassword);
+    if (!isPasswordValid) throw new UnauthorizedException();
+
     const payload = { sub: user.id, email: user.email, role: user.role };
     return {
       access_token: await this.jwtService.signAsync(payload),

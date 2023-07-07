@@ -7,6 +7,7 @@ import { env } from 'process';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from 'src/topics/auth/guards/auth.guard';
 import { RolesGuard } from 'src/topics/auth/guards/roles.guard';
+import { PasswordService } from 'src/topics/auth/password.service';
 console.log(env);
 
 @Module({
@@ -21,6 +22,7 @@ console.log(env);
   controllers: [AuthController],
   providers: [
     AuthService,
+    PasswordService,
     {
       provide: APP_GUARD,
       useClass: AuthGuard,

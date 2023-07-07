@@ -3,10 +3,11 @@ import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateUserInputDto, UpdateUserInputDto, userSecretFields } from 'src/topics/user/dto/user.dto';
 import _ from 'lodash';
+import { PasswordService } from 'src/topics/auth/password.service';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService, private passwordService: PasswordService) {}
 
   public async fetchUsersByPk(id: number): Promise<User> {
     return this.prismaService.user.findUnique({ where: { id } });
@@ -21,7 +22,7 @@ export class UserService {
   }
 
   public async createUser(requestBody: CreateUserInputDto): Promise<User> {
-    const saltedPassword = requestBody.password; // TODO improve
+    const saltedPassword = await this.passwordService.hashPassword(requestBody.password);
     const data = {
       saltedPassword,
       ..._.omit(requestBody, 'password'),
