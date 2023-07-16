@@ -34,8 +34,8 @@
     "prettier": "2.8.8"
   },
   "lint-staged": {
-    "backend/**/*.{js,ts,html}": "yarn workspace studiback run _:lint --",
-    "frontend/**/*.{js,ts,html}": "yarn workspace studifront run _:lint --",
-    "frontend/**/*.{css,scss,sass}": "yarn workspace studifront run _:stylelint --"
+    "backend/**/*.{js,ts,html}": "yarn workspace studiback run _:lint",
+    "frontend/**/*.{js,ts,html}": "yarn workspace studifront run _:lint",
+    "frontend/**/*.{css,scss,sass}": "yarn workspace studifront run _:stylelint"
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AUTH_STORAGE_KEY, StoredAuthProfile } from 'src/app/auth/models/auth-storage-keys';
+import { AUTH_STORAGE_KEY, StoredAuthProfile } from 'src/app/auth/_models/auth-storage-keys';
 
 type Headers = HttpHeaders | { [header: string]: string | string[] };
 type QueryParams = HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean> };

@@ -4,12 +4,13 @@ import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { appRoutes } from 'src/app/app-routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { httpInterceptors } from 'src/app/shared/http-interceptors-provider';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { authInterceptorFn } from 'src/app/auth/_interceptors/auth.interceptor';
+import { httpLogInterceptorFn } from 'src/app/shared/_interceptors/http-log.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(withInterceptors(httpInterceptors)),
+    provideHttpClient(withInterceptors([authInterceptorFn, httpLogInterceptorFn])),
     provideRouter(appRoutes),
     provideAnimations(),
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },

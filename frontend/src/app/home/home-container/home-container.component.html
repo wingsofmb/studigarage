@@ -1,4 +1,4 @@
-<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+<nav mat-tab-nav-bar [tabPanel]="tabPanel" class="navbar-container">
   <a mat-tab-link *ngFor="let tab of tabs$ | async" [active]="(activeLink$ | async) === tab.link" [routerLink]="tab.link">
     <ng-template mat-tab-label [ngIf]="tab.icon">
       <mat-icon [fontIcon]="tab.icon" aria-hidden="false" class="navbar-icon"></mat-icon>

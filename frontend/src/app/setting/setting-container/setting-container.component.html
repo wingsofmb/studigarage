@@ -1,0 +1,10 @@
+<mat-sidenav-container class="side-nav-container" [hasBackdrop]="false">
+  <mat-sidenav opened mode="side" class="side-nav">
+    <a *ngFor="let tab of tabs" [routerLink]="tab.link" [routerLinkActive]="'active'" class="nav-item">
+      <mat-icon *ngIf="tab.icon" [fontIcon]="tab.icon" aria-hidden="false" class="nav-icon"></mat-icon>{{ tab.label }}
+    </a>
+  </mat-sidenav>
+  <mat-sidenav-content class="side-nav-content">
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>

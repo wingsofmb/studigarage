@@ -1,7 +1,7 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from 'src/topics/auth/decorators/roles.decorator';
-import { UserRoleMapping, UserRoles } from 'src/topics/user/role.enum';
+import { UserRoles } from 'src/topics/user/role.enum';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -10,11 +10,10 @@ export class RolesGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const requiredRoles = this.reflector.getAllAndOverride<UserRoles[]>(ROLES_KEY, [context.getHandler(), context.getClass()]);
-    if (!requiredRoles) return true;
-    if (requiredRoles.includes(UserRoles.PUBLIC)) return true;
+    const { user, method, originalUrl } = context.switchToHttp().getRequest();
+    if (_.isNil(requiredRoles)) return true;
+    if (_.isEmpty(requiredRoles)) throw new Error(`requiredRoles must be defined for route ${method} ${originalUrl}`);
 
-    const { user } = context.switchToHttp().getRequest();
-    const highestRequiredRole = _.max(requiredRoles.map((role: UserRoles) => UserRoleMapping[role]));
-    return UserRoleMapping[user.role] >= highestRequiredRole;
+    return requiredRoles.includes(user.role);
   }
 }

@@ -1,4 +1,4 @@
-import { UserRoles } from 'src/app/auth/models/role.enum';
+import { UserRoles } from 'src/app/auth/_models/role.enum';
 
 export interface StoredAuthProfile {
   token: string;

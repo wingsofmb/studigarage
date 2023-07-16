@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { AUTH_STORAGE_KEY, StoredAuthProfile } from 'src/app/auth/models/auth-storage-keys';
-import { UserProfile } from 'src/app/auth/models/user-profile';
+import { AUTH_STORAGE_KEY, StoredAuthProfile } from 'src/app/auth/_models/auth-storage-keys';
+import { UserProfile } from 'src/app/auth/_models/user-profile';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +22,9 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.autorizationToken.next(null);
+    this.userProfile = null;
     this.cleanStoredProfile();
+    this.autorizationToken.next(null);
     console.info('Frontend logged out');
   }
 

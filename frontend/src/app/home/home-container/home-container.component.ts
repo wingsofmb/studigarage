@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
-import { NavbarLink } from 'src/app/home/models/navbar-links';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { NavbarLink } from 'src/app/shared/_models/navbar-links';
+import { AuthService } from 'src/app/auth/_services/auth.service';
 import { BehaviorSubject, Observable, Subject, filter, map, takeUntil, tap } from 'rxjs';
 import * as _ from 'lodash';
 
@@ -29,7 +29,7 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
     ];
     const authTabs: NavbarLink[] = [{ link: 'auth/login', label: 'Connexion', icon: 'login' }];
     const privateTabs: NavbarLink[] = [
-      { link: 'control-panel', label: 'Gestion', icon: 'settings' },
+      { link: 'setting', label: 'Gestion', icon: 'settings' },
       { link: 'auth/logout', label: 'Déconnexion', icon: 'logout' },
     ];
     this.tabs$ = this.authService.isLogged$.pipe(
@@ -44,6 +44,7 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         map((event) => (event as NavigationEnd).urlAfterRedirects.slice(1)),
+        map((path: string) => path.split('/')[0]),
         takeUntil(this._destroy$),
       )
       .subscribe((x) => this.activeLink$.next(x));
@@ -55,7 +56,7 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.activeLink$.next(this.router.url.slice(1));
+    this.activeLink$.next(this.router.url.slice(1).split('/')[0]);
   }
 
   public ngOnDestroy(): void {

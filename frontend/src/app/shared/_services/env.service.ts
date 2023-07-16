@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Environment } from 'src/app/shared/models/environment.enum';
+import { Environment } from 'src/app/shared/_models/environment.enum';
 import { envConfig } from 'src/environments/environment';
 
 @Injectable({

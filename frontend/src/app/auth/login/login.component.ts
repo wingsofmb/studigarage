@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthApiService } from 'src/app/auth/services/auth-api.service';
+import { AuthApiService } from 'src/app/auth/_services/auth-api.service';
 import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -43,7 +43,7 @@ export class LoginComponent {
         }),
       )
       .subscribe((response) => {
-        if (response) this.router.navigate(['/']);
+        if (response) this.router.navigate(['/setting']);
       });
   }
 }

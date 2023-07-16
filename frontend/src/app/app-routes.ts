@@ -1,5 +1,5 @@
 import { type Routes } from '@angular/router';
-import { healthCheckGuard } from 'src/app/shared/guards/health-check.guard';
+import { healthCheckGuard } from 'src/app/shared/_guards/health-check.guard';
 
 export const appRoutes: Routes = [
   {
