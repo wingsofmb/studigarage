@@ -16,6 +16,7 @@
     "init:db": "yarn workspace studiback run init:db",
     "serve:back": "yarn workspace studiback run serve",
     "serve:back:debug": "yarn workspace studiback run serve:debug",
+    "serve:front": "yarn workspace studifront run serve",
     "lint": "yarn workspaces run lint",
     "precommit": "lint-staged && yarn workspaces run precommit",
     "prepare": "husky install",
@@ -35,6 +36,6 @@
   "lint-staged": {
     "backend/**/*.{js,ts,html}": "yarn workspace studiback run _:lint --",
     "frontend/**/*.{js,ts,html}": "yarn workspace studifront run _:lint --",
-    "frontend/**/*.{css,scss,sass}": "yarn workspace studifront run _:lint --"
+    "frontend/**/*.{css,scss,sass}": "yarn workspace studifront run _:stylelint --"
   }
 }

@@ -1,0 +1,37 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(8, 12.5%);
+  grid-template-rows: repeat(8, 12.5%);
+  height: 100%;
+
+  .login-container {
+    background-color: antiquewhite;
+    border-radius: 6px;
+    display: inline-grid;
+    grid-column: 3 / 7;
+    grid-row: 3 / 7;
+    padding: 18px;
+
+    .title {
+      margin: auto;
+    }
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    min-width: 150px;
+    width: 100%;
+  }
+  
+  .input-fields {
+    margin: 6px 0;
+    width: 100%;
+  }
+
+  .error-msg {
+    font-weight: 600;
+    margin: 0 auto 12px;  
+  }
+}

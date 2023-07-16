@@ -19,7 +19,17 @@
 
 - Start DB container using `docker-compose -f backend/docker-compose.yml up`
 - Run backend  `yarn serve:back`
-- You can now target localhost:
+- You can now target localhost:3000
+
+## frontend
+
+- Run frontend `yarn serve:front`
+- You can now target localhost:4200
+
+## credentials
+
+- admin@studigarage.io -- P@ssword1
+- employee1@studigarage.io -- P@ssword2
 
 ### Run tests
 

@@ -4,7 +4,7 @@ import { AuthService } from 'src/topics/auth/auth.service';
 import { SignInDto } from 'src/topics/auth/dto/auth.dto';
 import { PublicApi } from 'src/topics/auth/decorators/public-api.decorator';
 
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 

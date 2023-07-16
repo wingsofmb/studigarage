@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "GPL-3",
   "scripts": {
-    "_:lint": "npm run _:eslint && npm run _:stylelint",
+    "_:lint": "npm run _:eslint",
     "_:eslint": "eslint --ext .ts,.js,.html",
     "_:stylelint": "stylelint",
     "build": "ng build",
@@ -13,7 +13,7 @@
     "lint": "npm run _:eslint -- --cache --fix . && npm run _:stylelint -- **/*.{css,sass,scss}",
     "ng": "ng",
     "nglint": "ng lint",
-    "serve": "ng serve",
+    "serve": "ng serve --watch",
     "test": "ng test",
     "watch": "ng build --watch --configuration development",
     "yarn": "yarn install --frozen-lockfile"
@@ -30,6 +30,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "lodash": "^4.17.21",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

@@ -1,0 +1,21 @@
+<div class="login-container">
+  <h1 class="title">Connexion</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="login-form">
+    <mat-form-field class="input-fields">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" placeholder="Ex. employee1@studigarage.io" />
+      <mat-error *ngIf="loginFormControl.hasError('email') && !loginFormControl.hasError('required')"> Email incorrect </mat-error>
+      <mat-error *ngIf="loginFormControl.hasError('required')"> L'Email est <strong>requis</strong> </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input-fields">
+      <mat-label>Mot de passe</mat-label>
+      <input type="password" matInput formControlName="password" placeholder="Ex. P@ssword2" />
+      <mat-error *ngIf="loginFormControl.hasError('required')"> Le mot de passe est <strong>requis</strong> </mat-error>
+    </mat-form-field>
+
+    <mat-error *ngIf="loginErrorCode === 401" class="error-msg">Identifiants incorrects</mat-error>
+    <mat-error *ngIf="!!loginErrorCode && loginErrorCode !== 401" class="error-msg">Connexion impossible</mat-error>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Connexion</button>
+  </form>
+</div>

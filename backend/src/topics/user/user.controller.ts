@@ -6,7 +6,7 @@ import { CreateUserInputDto, UpdateUserInputDto } from 'src/topics/user/dto/user
 import { UserRoles } from 'src/topics/user/role.enum';
 import { UserService } from 'src/topics/user/user.service';
 
-@Controller('users')
+@Controller('api/users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

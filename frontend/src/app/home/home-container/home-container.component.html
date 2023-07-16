@@ -1,0 +1,14 @@
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a mat-tab-link *ngFor="let tab of tabs$ | async" [active]="(activeLink$ | async) === tab.link" [routerLink]="tab.link">
+    <ng-template mat-tab-label [ngIf]="tab.icon">
+      <mat-icon [fontIcon]="tab.icon" aria-hidden="false" class="navbar-icon"></mat-icon>
+      {{ tab.label }}
+    </ng-template>
+    <ng-template [ngIf]="!tab.icon">
+      {{ tab.label }}
+    </ng-template>
+  </a>
+</nav>
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet />
+</mat-tab-nav-panel>
