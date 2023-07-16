@@ -38,7 +38,6 @@ export class LoginComponent {
     login$
       .pipe(
         catchError((error) => {
-          console.log(error.status);
           this.loginErrorCode = +error.status;
           return of(null);
         }),

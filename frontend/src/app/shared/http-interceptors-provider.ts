@@ -1,8 +1,5 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
-import { HttpLogInterceptor } from 'src/app/shared/interceptors/http-log.interceptor';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { authInterceptorFn } from 'src/app/auth/interceptors/auth.interceptor';
+import { httpLogInterceptorFn } from 'src/app/shared/interceptors/http-log.interceptor';
 
-export const httpProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: HttpLogInterceptor, multi: true },
-];
+export const httpInterceptors: HttpInterceptorFn[] = [authInterceptorFn, httpLogInterceptorFn];

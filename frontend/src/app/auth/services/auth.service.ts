@@ -24,6 +24,7 @@ export class AuthService {
   public logout(): void {
     this.autorizationToken.next(null);
     this.cleanStoredProfile();
+    console.info('Frontend logged out');
   }
 
   public setProfile(profile: UserProfile): void {
@@ -37,6 +38,11 @@ export class AuthService {
     this.autorizationToken.next(sessionData.token);
     const { id, email, role } = sessionData;
     this.userProfile = { id, email, role } as UserProfile;
+  }
+
+  public getToken(): string | undefined {
+    const sessionData = this.retrieveStoredProfile();
+    return sessionData.token ?? undefined;
   }
 
   private persistProfile(data: Partial<StoredAuthProfile>): void {

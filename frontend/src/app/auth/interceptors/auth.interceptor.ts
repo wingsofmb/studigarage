@@ -1,16 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpRequest, HttpInterceptorFn, HttpHandlerFn, HttpEvent, HttpResponse } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { tap } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
-import { Observable, tap } from 'rxjs';
+export const authInterceptorFn: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+  const authService = inject(AuthService);
+  const token = authService.getToken();
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  public intercept<T, U>(req: HttpRequest<T>, next: HttpHandler): Observable<HttpEvent<U>> {
-    console.log('before', req);
-    return next.handle(req).pipe(
-      tap((response: HttpEvent<U>) => {
-        console.log('after', response);
-      }),
-    );
-  }
-}
+  const authRequest = token ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) }) : req;
+  return next(authRequest).pipe(
+    tap({
+      error: (event: HttpEvent<unknown>) => {
+        if (event.type < 4) return;
+        if (+(event as HttpResponse<unknown>).status !== 401) return;
+
+        authService.logout();
+      },
+    }),
+  );
+};
