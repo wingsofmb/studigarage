@@ -7,13 +7,13 @@ import { NavbarLink } from 'src/app/shared/_models/navbar-links';
 import { RolesService } from 'src/app/auth/_services/roles.service';
 
 @Component({
-  selector: 'app-setting-container',
+  selector: 'app-control-panel-container',
   standalone: true,
   imports: [CommonModule, RouterModule, MatSidenavModule, MatIconModule],
-  templateUrl: './setting-container.component.html',
-  styleUrls: ['./setting-container.component.scss'],
+  templateUrl: './control-panel-container.component.html',
+  styleUrls: ['./control-panel-container.component.scss'],
 })
-export class SettingContainerComponent {
+export class ControlPanelContainerComponent {
   public tabs: NavbarLink[];
 
   // private _destroy$: Subject<null> = new Subject();

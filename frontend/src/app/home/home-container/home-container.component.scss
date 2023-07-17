@@ -5,4 +5,27 @@
   .navbar-icon {
     margin-right: 12px;
   }
+
+  .home-footer {
+    display: flex;
+    height: 80px;
+    background: cadetblue;
+    border-top: 1px solid rgb(0 0 0 / 10%);
+    align-items: center;
+
+    .timetable-section {
+      flex-grow: 1;
+    }
+
+    .contact-section {
+      display: flex;
+      flex-direction: column;
+      margin: 0 16px;
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
 }

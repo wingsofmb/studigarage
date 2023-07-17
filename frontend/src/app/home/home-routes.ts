@@ -21,9 +21,9 @@ export const homeRoutes: Routes = [
         component: HomePageComponent,
       },
       {
-        path: 'setting',
+        path: 'control-panel',
         canActivateChild: [logInGuard],
-        loadChildren: () => import('src/app/setting/setting.routes').then((mod) => mod.settingRoutes),
+        loadChildren: () => import('src/app/control-panel/control-panel.routes').then((mod) => mod.controlPanelRoutes),
       },
       {
         path: 'auth',

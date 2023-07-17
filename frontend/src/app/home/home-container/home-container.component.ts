@@ -7,21 +7,30 @@ import { NavbarLink } from 'src/app/shared/_models/navbar-links';
 import { AuthService } from 'src/app/auth/_services/auth.service';
 import { BehaviorSubject, Observable, Subject, filter, map, takeUntil, tap } from 'rxjs';
 import * as _ from 'lodash';
+import { Setting } from 'src/data-layer/setting/setting.model';
+import { SettingApiService } from 'src/data-layer/setting/setting-api.service';
 
 @Component({
   selector: 'app-home-container',
   standalone: true,
   imports: [CommonModule, RouterModule, MatTabsModule, MatIconModule],
+  providers: [SettingApiService],
   templateUrl: './home-container.component.html',
   styleUrls: ['./home-container.component.scss'],
 })
 export class HomeContainerComponent implements OnInit, OnDestroy {
   public tabs$: Observable<NavbarLink[]>;
   public activeLink$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  public setting: Setting | null = null;
 
   private _destroy$: Subject<null> = new Subject();
 
-  constructor(private authService: AuthService, private cdr: ChangeDetectorRef, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private settingApiService: SettingApiService,
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+  ) {
     const publicTabs: NavbarLink[] = [
       { link: 'home', label: 'Accueil', icon: 'home' },
       { link: 'offers', label: 'Annonces' },
@@ -29,7 +38,7 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
     ];
     const authTabs: NavbarLink[] = [{ link: 'auth/login', label: 'Connexion', icon: 'login' }];
     const privateTabs: NavbarLink[] = [
-      { link: 'setting', label: 'Gestion', icon: 'settings' },
+      { link: 'control-panel', label: 'Gestion', icon: 'settings' },
       { link: 'auth/logout', label: 'Déconnexion', icon: 'logout' },
     ];
     this.tabs$ = this.authService.isLogged$.pipe(
@@ -57,6 +66,11 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
       .subscribe();
 
     this.activeLink$.next(this.router.url.slice(1).split('/')[0]);
+
+    this.settingApiService
+      .get()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((setting: Setting) => (this.setting = setting));
   }
 
   public ngOnDestroy(): void {

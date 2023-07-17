@@ -16,12 +16,56 @@ enum Role {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  email          String   @unique
+  saltedPassword String
+  firstName      String
+  lastName       String
+  role           Role     @default(EMPLOYEE)
+}
+
+enum ServiceTheme {
+  REPAIR_MAINTENANCE
+  REVIEW
+  DIAGNOSTIC
+  CAR_BODY_AND_PAINTING
+  ADMIN
+  OTHER
+}
+
+model RepairService {
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  email String @unique
-  saltedPassword String
-  firstName String
-  lastName String
-  role Role @default(EMPLOYEE)
+  theme     ServiceTheme
+  name      String
+  price     Float
+}
+
+enum Day {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+model Timetable {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  day          Day
+  businessHour String
+}
+
+model Setting {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  phone     String
+  address   String
 }

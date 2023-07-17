@@ -1,14 +1,14 @@
 import { type Routes } from '@angular/router';
 import { rolesGuard } from 'src/app/auth/_guards/roles.guard';
 import { UserRoles } from 'src/data-layer/user/role.enum';
-import { CarManagementComponent } from 'src/app/setting/car-management/car-management.component';
-import { SettingContainerComponent } from 'src/app/setting/setting-container/setting-container.component';
-import { UserManagementComponent } from 'src/app/setting/user-management/user-management.component';
+import { CarManagementComponent } from 'src/app/control-panel/car-management/car-management.component';
+import { ControlPanelContainerComponent } from 'src/app/control-panel/control-panel-container/control-panel-container.component';
+import { UserManagementComponent } from 'src/app/control-panel/user-management/user-management.component';
 
-export const settingRoutes: Routes = [
+export const controlPanelRoutes: Routes = [
   {
     path: '',
-    component: SettingContainerComponent,
+    component: ControlPanelContainerComponent,
     children: [
       {
         path: 'car-management',
@@ -17,7 +17,7 @@ export const settingRoutes: Routes = [
       },
       {
         path: 'user-management',
-        canActivate: [rolesGuard([UserRoles.ADMIN], ['setting', '**'])],
+        canActivate: [rolesGuard([UserRoles.ADMIN], ['control-panel', '**'])],
         component: UserManagementComponent,
       },
       { path: '', redirectTo: 'car-management', pathMatch: 'full' },

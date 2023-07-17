@@ -9,7 +9,7 @@ import { UserApiService } from 'src/data-layer/user/user-api.service';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import { User } from 'src/data-layer/user/user.model';
 import { MatButtonModule } from '@angular/material/button';
-import { UserUpsertComponent } from 'src/app/setting/user-management/user-upsert/user-upsert.component';
+import { UserUpsertComponent } from 'src/app/control-panel/user-management/user-upsert/user-upsert.component';
 import { UserRoles } from 'src/data-layer/user/role.enum';
 
 @Component({
