@@ -6,9 +6,10 @@ import { PrismaService } from 'src/prisma.service';
 import { UserModule } from 'src/topics/user/user.module';
 import { AuthModule } from 'src/topics/auth/auth.module';
 import { SettingModule } from 'src/topics/setting/setting.module';
+import { TimetableModule } from 'src/topics/timetable/timetable.module';
 
 @Module({
-  imports: [UserModule, AuthModule, SettingModule],
+  imports: [UserModule, AuthModule, SettingModule, TimetableModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

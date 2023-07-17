@@ -9,12 +9,16 @@ import { BehaviorSubject, Observable, Subject, filter, map, takeUntil, tap } fro
 import * as _ from 'lodash';
 import { Setting } from 'src/data-layer/setting/setting.model';
 import { SettingApiService } from 'src/data-layer/setting/setting-api.service';
+import { TimetableApiService } from 'src/data-layer/timetable/timatable-api.service';
+import { Timetable } from 'src/data-layer/timetable/timetable.model';
+import { dayMapping, dayOrder } from 'src/app/home/home-container/day-mapping.model';
+import { Days } from 'src/data-layer/timetable/day.enum';
 
 @Component({
   selector: 'app-home-container',
   standalone: true,
   imports: [CommonModule, RouterModule, MatTabsModule, MatIconModule],
-  providers: [SettingApiService],
+  providers: [SettingApiService, TimetableApiService],
   templateUrl: './home-container.component.html',
   styleUrls: ['./home-container.component.scss'],
 })
@@ -22,12 +26,16 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
   public tabs$: Observable<NavbarLink[]>;
   public activeLink$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public setting: Setting | null = null;
+  public timetables: { [key: string]: string } = {};
+  public timetablesKeys: string[] = [];
+  public dayMapping = dayMapping;
 
   private _destroy$: Subject<null> = new Subject();
 
   constructor(
     private authService: AuthService,
     private settingApiService: SettingApiService,
+    private timetableApiService: TimetableApiService,
     private cdr: ChangeDetectorRef,
     private router: Router,
   ) {
@@ -71,6 +79,21 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
       .get()
       .pipe(takeUntil(this._destroy$))
       .subscribe((setting: Setting) => (this.setting = setting));
+
+    // TODO improve later by aggregation
+    this.timetableApiService
+      .getAll()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((rawTimetables: Timetable[]) => {
+        const groupedTimetable = _.groupBy(rawTimetables, 'businessHour');
+        const daysByHours = _.mapValues(groupedTimetable, (timetables: Timetable[]) => timetables.map((t) => t.day));
+        const daysByHoursOrdered = _.mapValues(daysByHours, (days: Days[]) => days.sort((d: Days) => dayOrder[d]));
+        const FrDaysByHours = _.mapValues(daysByHoursOrdered, (days: Days[]) => days.map((d: Days) => dayMapping[d]));
+        const dayListByHours = _.mapValues(FrDaysByHours, (days: string[]) => days.join(', '));
+        const reverted = _.invert(dayListByHours);
+        this.timetables = reverted;
+        this.timetablesKeys = _.keys(reverted);
+      });
   }
 
   public ngOnDestroy(): void {

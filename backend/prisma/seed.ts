@@ -62,8 +62,8 @@ const timeTableData: Prisma.TimetableCreateInput[] = [
   { day: 'WEDNESDAY', businessHour: '9h - 19h' },
   { day: 'THURSDAY', businessHour: '9h - 19h' },
   { day: 'FRIDAY', businessHour: '9h - 19h' },
-  { day: 'SATURDAY', businessHour: '9h - 19h' },
-  { day: 'SUNDAY', businessHour: '9h - 19h' },
+  { day: 'SATURDAY', businessHour: '9h - 18h' },
+  { day: 'SUNDAY', businessHour: '10h - 14h' },
 ];
 
 const settingData: Prisma.SettingCreateInput[] = [{ address: '25 rue de la chaumière, 75012 Paris', phone: '01.02.03.04.05' }];

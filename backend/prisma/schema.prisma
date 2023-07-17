@@ -36,9 +36,9 @@ enum ServiceTheme {
 }
 
 model RepairService {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int          @id @default(autoincrement())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
   theme     ServiceTheme
   name      String
   price     Float
@@ -58,7 +58,7 @@ model Timetable {
   id           Int      @id @default(autoincrement())
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  day          Day
+  day          Day      @unique
   businessHour String
 }
 
