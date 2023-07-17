@@ -13,8 +13,11 @@
   <router-outlet />
 </mat-tab-nav-panel>
 <footer class="home-footer">
+  <div class="timetable-title">Horaires</div>
   <div class="timetable-section">
-    <p *ngFor="let t of timetablesKeys" class="timetable-item">{{ t }} : {{ timetables[t] }}</p>
+    <p *ngFor="let t of timetablesKeys" class="timetable-item">
+      <strong>{{ t }}: &nbsp;</strong>{{ timetables[t] }}
+    </p>
   </div>
   <div class="contact-section">
     <p class="contact-item"><mat-icon style="margin-right: 6px">phone</mat-icon>Téléphone : {{ setting?.phone }}</p>

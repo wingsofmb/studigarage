@@ -66,7 +66,7 @@ const timeTableData: Prisma.TimetableCreateInput[] = [
   { day: 'SUNDAY', businessHour: '10h - 14h' },
 ];
 
-const settingData: Prisma.SettingCreateInput[] = [{ address: '25 rue de la chaumière, 75012 Paris', phone: '01.02.03.04.05' }];
+const settingData: Prisma.SettingCreateInput[] = [{ address: '25 rue de la chaumière, 75012 Paris', phone: '+33 1 02 03 04 05' }];
 
 async function main() {
   console.log(`Start seeding ...`);

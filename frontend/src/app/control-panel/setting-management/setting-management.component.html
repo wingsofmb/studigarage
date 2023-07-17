@@ -1,0 +1,24 @@
+<div class="mat-elevation-z8 form-container">
+  <h1 class="title">Numéro et adresse</h1>
+
+  <form [formGroup]="formGroup" (ngSubmit)="submitForm()" class="custom-form">
+    <mat-form-field class="input-fields">
+      <mat-label>Téléphone</mat-label>
+      <input type="text" matInput formControlName="phone" placeholder="Ex. +33 1 02 03 04 05" />
+      <mat-error *ngIf="formGroup.controls.phone.hasError('pattern')">
+        Le téléphone doit être au format <strong>+33 1 02 03 04 05</strong>
+      </mat-error>
+      <mat-error *ngIf="formGroup.controls.phone.hasError('required')"> Le téléphone est <strong>requis</strong> </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input-fields">
+      <mat-label>Adresse</mat-label>
+      <input type="text" matInput formControlName="address" />
+      <mat-error *ngIf="formGroup.controls.address.hasError('required')"> L'adresse est <strong>requise</strong> </mat-error>
+    </mat-form-field>
+
+    <div class="form-footer">
+      <mat-error *ngIf="errorCode === 400" class="error-msg">Mise à jour impossible</mat-error>
+      <button mat-flat-button color="primary" type="submit" [disabled]="!formGroup.valid">Mettre à jour</button>
+    </div>
+  </form>
+</div>

@@ -13,6 +13,6 @@ export class TimetableApiService {
   }
 
   public update(id: number, payload: UpdateTimetablePayload): Observable<Timetable> {
-    return this.backendService.put<Timetable, UpdateTimetablePayload>(`timetable`, payload);
+    return this.backendService.put<Timetable, UpdateTimetablePayload>(`timetable/${id}`, payload);
   }
 }

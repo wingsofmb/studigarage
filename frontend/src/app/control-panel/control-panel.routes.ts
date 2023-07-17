@@ -4,6 +4,8 @@ import { UserRoles } from 'src/data-layer/user/role.enum';
 import { CarManagementComponent } from 'src/app/control-panel/car-management/car-management.component';
 import { ControlPanelContainerComponent } from 'src/app/control-panel/control-panel-container/control-panel-container.component';
 import { UserManagementComponent } from 'src/app/control-panel/user-management/user-management.component';
+import { TimetableManagementComponent } from 'src/app/control-panel/timetable-management/timetable-management.component';
+import { SettingManagementComponent } from 'src/app/control-panel/setting-management/setting-management.component';
 
 export const controlPanelRoutes: Routes = [
   {
@@ -19,6 +21,16 @@ export const controlPanelRoutes: Routes = [
         path: 'user-management',
         canActivate: [rolesGuard([UserRoles.ADMIN], ['control-panel', '**'])],
         component: UserManagementComponent,
+      },
+      {
+        path: 'setting-management',
+        canActivate: [rolesGuard([UserRoles.ADMIN], ['control-panel', '**'])],
+        component: SettingManagementComponent,
+      },
+      {
+        path: 'timetable-management',
+        canActivate: [rolesGuard([UserRoles.ADMIN], ['control-panel', '**'])],
+        component: TimetableManagementComponent,
       },
       { path: '', redirectTo: 'car-management', pathMatch: 'full' },
     ],

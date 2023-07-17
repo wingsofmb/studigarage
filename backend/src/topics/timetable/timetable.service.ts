@@ -8,7 +8,7 @@ export class TimetableService {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async fetchTimetables(): Promise<Timetable[]> {
-    return this.prismaService.timetable.findMany();
+    return this.prismaService.timetable.findMany({ orderBy: [{ id: 'asc' }] });
   }
 
   public async fetchTimetableByPk(id: number): Promise<Timetable> {

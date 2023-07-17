@@ -42,7 +42,7 @@ export class LoginComponent {
         }),
       )
       .subscribe((response) => {
-        if (response) this.router.navigate(['/setting']);
+        if (response) this.router.navigate(['/control-panel']);
       });
   }
 }

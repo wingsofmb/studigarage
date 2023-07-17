@@ -4,7 +4,7 @@
   grid-template-rows: repeat(8, 12.5%);
   height: 100%;
 
-  .login-container {
+  .form-container {
     background-color: antiquewhite;
     border-radius: 6px;
     display: inline-grid;
@@ -17,7 +17,7 @@
     }
   }
 
-  .login-form {
+  .custom-form {
     display: flex;
     flex-direction: column;
     max-width: 500px;

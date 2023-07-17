@@ -1,0 +1,16 @@
+<div class="mat-elevation-z8 form-container">
+  <h1 class="title">Horaires</h1>
+
+  <form [formGroup]="formGroup" (ngSubmit)="submitForm()" class="custom-form">
+    <mat-form-field *ngFor="let day of days" class="input-fields">
+      <mat-label>{{ dayMapping[day] }}</mat-label>
+      <input type="text" matInput [formControlName]="day" />
+      <mat-error *ngIf="formGroup.controls[day].hasError('required')"> L'horaire est <strong>requis</strong> </mat-error>
+    </mat-form-field>
+
+    <div class="form-footer">
+      <mat-error *ngIf="errorCode === 400" class="error-msg">Mise à jour impossible</mat-error>
+      <button mat-flat-button color="primary" type="submit" [disabled]="!formGroup.valid">Mettre à jour</button>
+    </div>
+  </form>
+</div>

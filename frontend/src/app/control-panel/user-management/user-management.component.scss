@@ -1,12 +1,34 @@
 :host {
-  display: block;
-  height: 100%;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
 
-  .create-btn {
-    display: block;
-    margin-left: auto;
+  .heading {
+    display: flex;
     margin-bottom: 12px;
+
+    .create-btn {
+      display: block;
+      margin-left: auto;
+    }
+  }
+
+  .user-management-container {
+    background-color: #F2E9E4CC;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    min-width: 85%;
+    max-width: 92%;
+    margin-bottom: 28px;
+    padding: 32px;
+    overflow: hidden;
+  }
+
+  .table-container,
+  .paginator {
+    background-color: #F2E9E4CC;
   }
 }
 

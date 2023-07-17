@@ -21,10 +21,10 @@ import { UserRoles } from 'src/data-layer/user/role.enum';
   styleUrls: ['./user-management.component.scss'],
 })
 export class UserManagementComponent implements AfterViewInit, OnDestroy {
-  displayedColumns: string[] = ['id', 'email', 'firstName', 'lastName', 'role', 'action'];
+  displayedColumns: string[] = ['email', 'firstName', 'lastName', 'role', 'action'];
   public dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
   public userRoleMapping: { [key in UserRoles]: string } = {
-    [UserRoles.ADMIN]: 'Administrateur',
+    [UserRoles.ADMIN]: 'Admin.',
     [UserRoles.EMPLOYEE]: 'Salarié',
   };
   public UserRoles = UserRoles;

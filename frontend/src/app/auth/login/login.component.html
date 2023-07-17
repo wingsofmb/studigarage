@@ -1,7 +1,7 @@
-<div class="login-container">
+<div class="form-container">
   <h1 class="title">Connexion</h1>
 
-  <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="login-form">
+  <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="custom-form">
     <mat-form-field class="input-fields">
       <mat-label>Email</mat-label>
       <input type="email" matInput formControlName="email" placeholder="Ex. employee1@studigarage.io" />

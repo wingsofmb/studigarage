@@ -1,7 +1,10 @@
-<div>
-  <button mat-flat-button color="primary" class="create-btn" (click)="createUser()">Créer</button>
+<div class="mat-elevation-z8 user-management-container">
+  <div class="heading">
+    <h1 class="title">Utilisateurs</h1>
+    <button mat-flat-button color="primary" class="create-btn" (click)="createUser()">Créer</button>
+  </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  <table mat-table [dataSource]="dataSource" class="table-container">
     <!-- Id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Identifiant</th>
@@ -54,5 +57,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of users"> </mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of users" class="paginator" />
 </div>

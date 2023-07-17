@@ -11,7 +11,7 @@ import { Setting } from 'src/data-layer/setting/setting.model';
 import { SettingApiService } from 'src/data-layer/setting/setting-api.service';
 import { TimetableApiService } from 'src/data-layer/timetable/timatable-api.service';
 import { Timetable } from 'src/data-layer/timetable/timetable.model';
-import { dayMapping, dayOrder } from 'src/app/home/home-container/day-mapping.model';
+import { dayMapping, dayOrder } from 'src/data-layer/timetable/day-mapping.model';
 import { Days } from 'src/data-layer/timetable/day.enum';
 
 @Component({
