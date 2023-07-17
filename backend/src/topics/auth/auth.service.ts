@@ -2,15 +2,15 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
 import { GetProdileOutputDto } from 'src/topics/auth/dto/auth.dto';
-import { UserService } from 'src/topics/user/user.service';
 import { PasswordService } from 'src/topics/auth/password.service';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UserService, private jwtService: JwtService, private passwordService: PasswordService) {}
+  constructor(private prismaService: PrismaService, private jwtService: JwtService, private passwordService: PasswordService) {}
 
   async signIn(email: string, pass: string): Promise<{ access_token: string }> {
-    const user = await this.usersService.fetchUsersByEmail(email);
+    const user = await this.prismaService.user.findUnique({ where: { email } });
     if (!user) throw new UnauthorizedException();
 
     const isPasswordValid = await this.passwordService.validatePassword(pass, user.saltedPassword);

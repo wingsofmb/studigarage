@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client';
 import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
 
 export class CreateUserInputDto {
@@ -15,6 +14,17 @@ export class CreateUserInputDto {
   password: string;
 }
 
-export type UpdateUserInputDto = Partial<Prisma.UserUpdateInput>;
+export const userPublicFieldsFilter = {
+  createdAt: true,
+  email: true,
+  firstName: true,
+  id: true,
+  lastName: true,
+  role: true,
+  saltedPassword: false,
+  updatedAt: true,
+};
+
+export type UpdateUserInputDto = CreateUserInputDto;
 
 export const userSecretFields = ['saltedPassword'];

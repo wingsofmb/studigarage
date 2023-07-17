@@ -14,19 +14,19 @@
 
     .nav-item {
       align-items: center;
-      color: rgba(0 0 0 60%);
+      color: rgb(0 0 0 / 60%);
       display: flex;
       flex-direction: column;
       height: 80px;
       justify-content: center;
 
       &.active {
-        background: rgba(200 200 200 50%);
+        background: rgb(200 200 200 / 50%);
         color: #3f51b5;
       }
 
       &:hover {
-        background: rgba(220 220 220 50%);
+        background: rgb(220 220 220 / 50%);
       }
     }
 
@@ -37,7 +37,7 @@
 
   .side-nav-content {
     padding: 12px;
-    border-right: 1px solid rgba(200 200 200 50%);
-    border-top: 1px solid rgba(200 200 200 50%);
+    border-right: 1px solid rgb(200 200 200 / 50%);
+    border-top: 1px solid rgb(200 200 200 / 50%);
   }
 }

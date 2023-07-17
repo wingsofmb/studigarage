@@ -1,4 +1,4 @@
-import { UserProfile } from 'src/app/auth/_models/user-profile';
+import { UserProfile } from 'src/data-layer/auth/user-profile';
 
 export interface AuthLoginPayload {
   email: string;

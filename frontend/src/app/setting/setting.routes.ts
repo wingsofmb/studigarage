@@ -1,6 +1,6 @@
 import { type Routes } from '@angular/router';
 import { rolesGuard } from 'src/app/auth/_guards/roles.guard';
-import { UserRoles } from 'src/app/auth/_models/role.enum';
+import { UserRoles } from 'src/data-layer/user/role.enum';
 import { CarManagementComponent } from 'src/app/setting/car-management/car-management.component';
 import { SettingContainerComponent } from 'src/app/setting/setting-container/setting-container.component';
 import { UserManagementComponent } from 'src/app/setting/user-management/user-management.component';

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Request } from '@nestjs/common';
 import type { User } from '@prisma/client';
 import { ApiValidationPipe } from 'src/common/pipes/api-validation.pipe';
 import { Roles } from 'src/topics/auth/decorators/roles.decorator';
@@ -19,7 +19,6 @@ export class UserController {
   @Post('')
   @Roles(UserRoles.ADMIN)
   public async createUser(@Body(new ApiValidationPipe()) requestBody: CreateUserInputDto): Promise<User> {
-    // Validate roles
     return this.userService.createUser(requestBody);
   }
 
@@ -34,8 +33,6 @@ export class UserController {
   @Put(':id')
   @Roles(UserRoles.ADMIN)
   public async updateUser(@Param('id') id: string, @Body(new ApiValidationPipe()) requestBody: UpdateUserInputDto): Promise<User> {
-    // Validate requestBody
-    // Validate roles
     const user = await this.userService.fetchUsersByPk(Number(id));
     if (!user) throw new NotFoundException();
 
@@ -44,8 +41,10 @@ export class UserController {
 
   @Delete(':id')
   @Roles(UserRoles.ADMIN)
-  async deleteUser(@Param('id', ParseIntPipe) id: string): Promise<User> {
-    // Validate rights
+  async deleteUser(@Param('id', ParseIntPipe) id: string, @Request() req: Request): Promise<User> {
+    const loggedUser = req['user'];
+    const isDeletingSelf = +loggedUser.sub === +id;
+    if (isDeletingSelf) throw new BadRequestException('Cant delete self');
     return this.userService.deleteUser(Number(id));
   }
 }

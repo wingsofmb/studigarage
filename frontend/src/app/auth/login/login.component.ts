@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthApiService } from 'src/app/auth/_services/auth-api.service';
+import { AuthApiService } from 'src/data-layer/auth/auth-api.service';
 import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,10 +20,9 @@ export class LoginComponent {
   public loginErrorCode: number | null = null;
 
   public loginForm = new FormGroup({
-    email: new FormControl('employee1@studigarage.io', [Validators.required, Validators.email]),
-    password: new FormControl('P@ssword2', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
   });
-  public loginFormControl = new FormControl('', [Validators.required, Validators.email]);
   private _destroy$: Subject<null> = new Subject();
 
   constructor(private authApiService: AuthApiService, private router: Router) {}

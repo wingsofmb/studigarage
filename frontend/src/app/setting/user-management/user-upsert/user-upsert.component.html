@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>{{ isCreation ? 'Créer' : 'Modifier' }} un compte utilisateur</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="userForm" class="user-form">
+    <mat-form-field class="input-fields">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" cdkFocusInitial placeholder="Ex. employee1@studigarage.io" />
+      <mat-error *ngIf="userForm.controls.email.hasError('email')"> Format d'email incorrect</mat-error>
+      <mat-error *ngIf="userForm.controls.email.hasError('required')"> L'Email est <strong>requis</strong> </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input-fields">
+      <mat-label>Mot de passe</mat-label>
+      <input type="password" matInput formControlName="password" placeholder="Ex. P@ssword2" />
+      <mat-error *ngIf="userForm.controls.password.hasError('required')"> Mot de passe <strong>requis</strong> </mat-error>
+      <mat-error *ngIf="userForm.controls.password.hasError('strongPassword')">
+        Doit contenir 8 caractères dont chiffres, minuscules, majuscules et [!@#$&*]
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input-fields">
+      <mat-label>Prénom</mat-label>
+      <input type="text" matInput formControlName="firstName" />
+      <mat-error *ngIf="userForm.controls.firstName.hasError('required')"> Prénom <strong>requis</strong> </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input-fields">
+      <mat-label>Nom</mat-label>
+      <input type="text" matInput formControlName="lastName" />
+      <mat-error *ngIf="userForm.controls.lastName.hasError('required')"> Nom <strong>requis</strong> </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions [align]="'end'">
+  <mat-error *ngIf="errorCode === 400" class="error-msg">Informations incorrectes</mat-error>
+  <mat-error *ngIf="!!errorCode && errorCode !== 400" class="error-msg">{{ isCreation ? 'Création' : 'Modification' }} impossible</mat-error>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" [disabled]="!userForm.valid" (click)="saveForm()">{{ isCreation ? 'Créer' : 'Modifier' }}</button>
+</mat-dialog-actions>

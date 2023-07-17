@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { UserRoles } from 'src/app/auth/_models/role.enum';
+import { UserRoles } from 'src/data-layer/user/role.enum';
 import { RolesService } from 'src/app/auth/_services/roles.service';
 
 type RoleGuardFn = (authorizedRoles: UserRoles[], redirectTo?: string[]) => CanActivateFn;

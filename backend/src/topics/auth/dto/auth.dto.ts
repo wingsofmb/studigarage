@@ -1,5 +1,5 @@
 import { IsEmail, IsString } from 'class-validator';
-import { UserRoles } from 'src/topics/user/role.enum';
+import type { UserRoles } from 'src/topics/user/role.enum';
 
 export class SignInDto {
   @IsEmail()

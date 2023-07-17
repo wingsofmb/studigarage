@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { AUTH_STORAGE_KEY, StoredAuthProfile } from 'src/app/auth/_models/auth-storage-keys';
-import { UserProfile } from 'src/app/auth/_models/user-profile';
+import { UserProfile } from 'src/data-layer/auth/user-profile';
 
 @Injectable({
   providedIn: 'root',

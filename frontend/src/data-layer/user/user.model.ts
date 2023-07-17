@@ -1,10 +1,11 @@
 import { UserRoles } from 'src/data-layer/user/role.enum';
 
-export interface StoredAuthProfile {
-  token: string;
+export interface User {
   id: number;
+  createdAt: string;
+  updatedAt: string;
   email: string;
+  firstName: string;
+  lastName: string;
   role: UserRoles;
 }
-
-export const AUTH_STORAGE_KEY = 'CURRENT_AUTH_SESSION';

@@ -1,4 +1,4 @@
-import { UserRoles } from 'src/app/auth/_models/role.enum';
+import { UserRoles } from 'src/data-layer/user/role.enum';
 
 export interface UserProfile {
   id: number;

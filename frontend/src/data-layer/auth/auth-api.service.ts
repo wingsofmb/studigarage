@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, switchMap, tap } from 'rxjs';
-import { AuthLoginPayload, AuthLoginResponse, AuthProfileResponse } from 'src/app/auth/_models/auth-api.dto';
-import { UserProfile } from 'src/app/auth/_models/user-profile';
-import { AuthService } from 'src/app/auth/_services/auth.service';
+import { AuthLoginPayload, AuthLoginResponse, AuthProfileResponse } from 'src/data-layer/auth/auth-api.dto';
+import { UserProfile } from 'src/data-layer/auth/user-profile';
+import { AuthService } from 'src/app/auth/_services/auth.service'; // TODO REMOVE
 
-import { BackendService } from 'src/app/shared/_services/backend.service';
+import { BackendService } from 'src/data-layer/_shared/backend.service';
 
 @Injectable()
 export class AuthApiService {
