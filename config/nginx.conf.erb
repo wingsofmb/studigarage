@@ -39,6 +39,7 @@ http {
 	server {
 		listen <%= ENV["PORT"] %>;
 		server_name _;
+		index     index.html;
 		keepalive_timeout 5;
 		client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
@@ -50,7 +51,17 @@ http {
 		## Document root
 		root /app/frontend/dist/studifront;
 
-    #port_in_redirect off;
+		port_in_redirect off;
+
+    # Redirect requests made to /api
+    location /api {
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_set_header Host $http_host;
+      # If you have any long running API calls, the read timeout needs to be increased here
+      # proxy_read_timeout 120s;
+			port_in_redirect off;
+      proxy_pass https://studigarage-e3153807165e.herokuapp.com/;
+  	}
 
 		location / {
 			## Clean URLs: match on extensionless requests.
@@ -60,15 +71,6 @@ http {
 			## When enabled, the client-side app must handle its own 404 errors.
 			# error_page 404 = /index.html;
 		}
-
-    # Redirect requests made to /api
-    location /api/ {
-      proxy_set_header X-Forwarded-For $remote_addr;
-      proxy_set_header Host $http_host;
-      # If you have any long running API calls, the read timeout needs to be increased here
-      # proxy_read_timeout 120s;
-      proxy_pass https://studigarage-e3153807165e.herokuapp.com/;
-  }
 
 		## Define specific behaviors for sub directories and other locations.
 		# location /assets {
