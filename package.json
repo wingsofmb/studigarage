@@ -20,7 +20,8 @@
     "lint": "yarn workspaces run lint",
     "precommit": "lint-staged && yarn workspaces run precommit",
     "prepare": "husky install",
-    "yarn": "yarn install --frozen-lockfile"
+    "yarn": "yarn install --frozen-lockfile",
+    "start": "yarn workspace studiback run start"
   },
   "husky": {
     "hooks": {
