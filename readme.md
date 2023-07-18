@@ -11,7 +11,7 @@
 # Initialize project Run project
 
 - Start DB container using `docker-compose -f backend/docker-compose.yml up`
-- Setup the DB locally `yarn run init:db`
+- Setup the environment variables locally `yarn run init:env` ( mandatory to target DB )
 
 # Run the project
 
