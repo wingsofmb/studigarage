@@ -50,6 +50,8 @@ http {
 		## Document root
 		root /app/frontend/dist/studifront;
 
+    port_in_redirect off;
+
 		location / {
 			## Clean URLs: match on extensionless requests.
 			# try_files $uri $uri/ $uri.html =404;
@@ -58,6 +60,11 @@ http {
 			## When enabled, the client-side app must handle its own 404 errors.
 			# error_page 404 = /index.html;
 		}
+
+    # Redirect requests made to /api
+    location /api {
+      proxy_pass https://studigarage-e3153807165e.herokuapp.com/;
+    }
 
 		## Define specific behaviors for sub directories and other locations.
 		# location /assets {
