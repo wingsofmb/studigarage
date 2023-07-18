@@ -13,9 +13,9 @@
   },
   "scripts": {
     "_:lint": "yarn workspaces run _:lint",
-    "build": "yarn workspace studiback run build",
+    "build": "yarn workspaces run build",
     "generate:pwd": "yarn workspace studiback run generate:pwd",
-    "heroku-postbuild": "yarn workspace studiback run build",
+    "heroku-postbuild": "yarn workspaces run build",
     "init:env": "yarn workspace studiback run init:env",
     "lint": "yarn workspaces run lint",
     "precommit": "lint-staged && yarn workspaces run precommit",
