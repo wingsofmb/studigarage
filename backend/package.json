@@ -4,7 +4,7 @@
   "license": "GPL-3",
   "scripts": {
     "_:lint": "eslint --ext .ts,.js",
-    "build": "nest build",
+    "build": "nest build && prisma generate",
     "init:db": "ts-node tools/init-local-db.ts",
     "lint": "npm run _:lint -- --cache --fix \"{src,apps,libs,prisma,test}/**/*.ts\"",
     "migrate:dev": "yarn prisma migrate dev",

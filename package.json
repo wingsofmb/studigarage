@@ -14,6 +14,7 @@
   "scripts": {
     "_:lint": "yarn workspaces run _:lint",
     "init:db": "yarn workspace studiback run init:db",
+    "build": "yarn workspace studiback run build",
     "serve:back": "yarn workspace studiback run serve",
     "serve:back:debug": "yarn workspace studiback run serve:debug",
     "serve:front": "yarn workspace studifront run serve",
