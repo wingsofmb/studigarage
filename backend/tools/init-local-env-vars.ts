@@ -6,14 +6,14 @@ import * as chalk from 'chalk';
 
 // resolve(.) resolve backend/
 const defaultEnvConfigFile = resolve('config', 'env.local.txt');
-const prismaEnvFile = resolve('.env');
+const envFile = resolve('.env');
 const log = console.log;
 
 // ---------------------------------------------------------------
-log(chalk.yellow('--Launching init-local-db script--'));
+log(chalk.yellow('--Launching init-local-env-var script--'));
 
 log(chalk.blueBright('  Setting up .env file from config'));
-log(chalk.blueBright(`  ${defaultEnvConfigFile} => ${prismaEnvFile}`));
-readFile(defaultEnvConfigFile).then((content: Buffer) => writeFile(prismaEnvFile, content));
+log(chalk.blueBright(`  ${defaultEnvConfigFile} => ${envFile}`));
+readFile(defaultEnvConfigFile).then((content: Buffer) => writeFile(envFile, content));
 
-log(chalk.yellow('--Done executing init-local-db script--'));
+log(chalk.yellow('--Done executing init-local-env-var script--'));

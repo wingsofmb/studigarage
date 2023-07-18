@@ -13,18 +13,19 @@
   },
   "scripts": {
     "_:lint": "yarn workspaces run _:lint",
-    "init:db": "yarn workspace studiback run init:db",
     "build": "yarn workspace studiback run build",
-    "serve:back": "yarn workspace studiback run serve",
-    "serve:back:debug": "yarn workspace studiback run serve:debug",
-    "serve:front": "yarn workspace studifront run serve",
+    "generate:pwd": "yarn workspace studiback run generate:pwd",
+    "heroku-postbuild": "yarn workspace studiback run build",
+    "init:env": "yarn workspace studiback run init:env",
     "lint": "yarn workspaces run lint",
     "precommit": "lint-staged && yarn workspaces run precommit",
     "prepare": "husky install",
-    "yarn": "yarn install --frozen-lockfile",
-    "start": "npm run start:back",
+    "serve:back:debug": "yarn workspace studiback run serve:debug",
+    "serve:back": "yarn workspace studiback run serve",
+    "serve:front": "yarn workspace studifront run serve",
     "start:back": "yarn workspace studiback run start",
-    "heroku-postbuild": "yarn workspace studiback run build"
+    "start": "npm run start:back",
+    "yarn": "yarn install --frozen-lockfile"
   },
   "husky": {
     "hooks": {

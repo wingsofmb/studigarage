@@ -5,10 +5,10 @@
   "scripts": {
     "_:lint": "eslint --ext .ts,.js",
     "build": "nest build && prisma generate",
+    "generate:pwd": "ts-node tools/generate-password.ts",
     "init:env": "ts-node tools/init-local-env-vars.ts",
     "lint": "npm run _:lint -- --cache --fix \"{src,apps,libs,prisma,test}/**/*.ts\"",
     "migrate:dev": "yarn prisma migrate dev",
-    "prod:seed:db": "prisma db seed",
     "serve:debug": "nest start --debug --watch",
     "serve": "nest start --watch",
     "start:dev": "nest start",
