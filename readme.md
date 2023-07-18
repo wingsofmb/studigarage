@@ -45,3 +45,13 @@ $ yarn run test:e2e
 # test coverage
 $ yarn run test:cov
 ```
+
+# Deploy
+
+```bash
+# deploy backend
+$ git push heroku-studigarage
+
+# deploy frontend
+$ git push heroku-studifront
+```
