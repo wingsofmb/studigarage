@@ -25,9 +25,9 @@ http {
 
 	server_tokens off;
 
-	log_format l2met 'measure#nginx.service=$request_time request_id=$http_x_request_id';
-	access_log /dev/stdout l2met;
-	error_log /dev/stdout l2met;
+	# log_format l2met 'measure#nginx.service=$request_time request_id=$http_x_request_id';
+	# access_log /dev/stdout l2met;
+	# error_log /dev/stderr l2met;
 	# Remote IP, request path, HTTP status, & timestamp are all logged by Heroku Router, so not useful to include here.
 
 	include mime.types;
