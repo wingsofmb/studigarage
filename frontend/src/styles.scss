@@ -9,3 +9,44 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.presentation-block {
+  display: flex;
+  flex-direction: row;
+  height: 33vh;
+  max-height: 33vh;
+  overflow: hidden;
+
+  &.heading-block {
+    height: 15vh;
+    max-height: 15vh;
+  }
+
+  .left-side {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 5vw;
+  }
+
+  .right-side {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5vw;
+  }
+
+  .main-side {
+    flex-grow: 1;
+  }
+}
+
+.home-pictures {
+  display: block;
+  max-width: 230px;
+  max-height: 25vh;
+  width: auto;
+  height: auto;
+}

@@ -7,7 +7,7 @@ import { UpdateSettingInputDto } from 'src/topics/setting/dto/setting.dto';
 import { SettingService } from 'src/topics/setting/setting.service';
 import { UserRoles } from 'src/topics/user/role.enum';
 
-@Controller('api/setting')
+@Controller('api/settings')
 export class SettingController {
   constructor(private readonly settingService: SettingService) {}
 

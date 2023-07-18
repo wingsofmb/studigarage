@@ -1,4 +1,5 @@
 :host {
-  display: block;
-  height: calc(100% - 48px - 80px);
+  display: flex;
+  flex-direction: column;
+  padding: 5vw;
 }

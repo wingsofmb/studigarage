@@ -9,10 +9,10 @@ export class SettingApiService {
   constructor(private backendService: BackendService) {}
 
   public get(): Observable<Setting> {
-    return this.backendService.get<Setting>(`setting`);
+    return this.backendService.get<Setting>(`settings`);
   }
 
   public update(payload: UpdateSettingPayload): Observable<Setting> {
-    return this.backendService.put<Setting, UpdateSettingPayload>(`setting`, payload);
+    return this.backendService.put<Setting, UpdateSettingPayload>(`settings`, payload);
   }
 }

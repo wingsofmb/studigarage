@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 5vw;
+
+  .service-line {
+    display: flex;
+    align-items: center;
+
+    .service-name {
+      flex-grow: 1;
+    }
+
+    .service-price {
+      color: grey;
+      font-style: italic;
+      font-size: 12px;
+      margin: 0 12px;
+    }
+  }
+}

@@ -24,6 +24,7 @@ export class ControlPanelContainerComponent {
       { link: 'user-management', label: 'Utilisateurs', icon: 'person' },
       { link: 'setting-management', label: 'Numéro et adresse', icon: 'call' },
       { link: 'timetable-management', label: 'Horaires', icon: 'date_range' },
+      { link: 'service-management', label: 'Services', icon: 'build' },
     ];
     const employeeTabs: NavbarLink[] = [{ link: 'car-management', label: 'Annonces', icon: 'directions_car' }];
     this.tabs = this.rolesService.isAdmin() ? adminTabs : employeeTabs;

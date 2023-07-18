@@ -41,13 +41,14 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
   ) {
     const publicTabs: NavbarLink[] = [
       { link: 'home', label: 'Accueil', icon: 'home' },
-      { link: 'offers', label: 'Annonces' },
-      { link: 'contact', label: 'Nous contacter' },
+      { link: 'offers', label: 'Tous nos véhicules' },
+      { link: 'services', label: 'Services' },
+      { link: 'contact', label: 'Contact' },
     ];
     const authTabs: NavbarLink[] = [{ link: 'auth/login', label: 'Connexion', icon: 'login' }];
     const privateTabs: NavbarLink[] = [
       { link: 'control-panel', label: 'Gestion', icon: 'settings' },
-      { link: 'auth/logout', label: 'Déconnexion', icon: 'logout' },
+      { link: 'auth/logout', label: '', icon: 'logout' },
     ];
     this.tabs$ = this.authService.isLogged$.pipe(
       map((isLogged: boolean) => (isLogged ? _.concat(publicTabs, privateTabs) : _.concat(publicTabs, authTabs))),

@@ -58,7 +58,7 @@ export class SettingManagementComponent implements OnInit, OnDestroy {
       )
       .subscribe((response) => {
         if (!response) return;
-        this.snackBar.open('Informations mises à jour', 'OK', { duration: 2000 });
+        this.snackBar.open('Informations mises à jour', 'OK', { duration: 1000 });
         this.errorCode = null;
       });
   }

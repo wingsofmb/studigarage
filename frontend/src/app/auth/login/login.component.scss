@@ -1,11 +1,12 @@
 :host {
+  flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(8, 12.5%);
   grid-template-rows: repeat(8, 12.5%);
   height: 100%;
 
   .form-container {
-    background-color: antiquewhite;
+    background-color: white;
     border-radius: 6px;
     display: inline-grid;
     grid-column: 3 / 7;

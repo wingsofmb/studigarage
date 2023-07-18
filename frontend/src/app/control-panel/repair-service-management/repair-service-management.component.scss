@@ -5,16 +5,29 @@
   overflow: scroll;
 
   .heading {
-    display: flex;
+    display: block;
     margin-bottom: 12px;
 
-    .create-btn {
-      display: block;
-      margin-left: auto;
+    .controls {
+      display: flex;
+      flex-direction: row;
+
+      .search-bar {
+        flex-grow: 1;
+      }
+
+      .spacer {
+        flex-grow: 1;
+      }
+
+      .create-btn {
+        display: block;
+        margin-left: auto;
+      }
     }
   }
 
-  .user-management-container {
+  .rs-management-container {
     background-color: white;
     border-radius: 6px;
     display: flex;

@@ -7,9 +7,10 @@ import { UserModule } from 'src/topics/user/user.module';
 import { AuthModule } from 'src/topics/auth/auth.module';
 import { SettingModule } from 'src/topics/setting/setting.module';
 import { TimetableModule } from 'src/topics/timetable/timetable.module';
+import { RepairServiceModule } from 'src/topics/repair-service/repair-service.module';
 
 @Module({
-  imports: [UserModule, AuthModule, SettingModule, TimetableModule],
+  imports: [UserModule, AuthModule, SettingModule, TimetableModule, RepairServiceModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

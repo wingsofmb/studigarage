@@ -1,5 +1,7 @@
 :host {
-  display: block;
-  height: calc(100% - 48px);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 48px - 80px);
   width: 100%;
+  background-color: #F2E9E4;
 }

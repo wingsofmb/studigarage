@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Ajouter un service de réparation</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="formGroup" class="form-container">
+    <mat-form-field class="input-fields">
+      <mat-label>Thème</mat-label>
+      <mat-select [formControl]="formGroup.controls.theme" required>
+        <mat-option *ngFor="let theme of themes" [value]="theme">
+          {{ themeMapping[theme] }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formGroup.controls.theme.hasError('required')"> La thématique est <strong>requise</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-fields">
+      <mat-label>Dénomination du service</mat-label>
+      <input type="text" matInput formControlName="name" cdkFocusInitial />
+      <mat-error *ngIf="formGroup.controls.name.hasError('required')"> Le nom est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-fields">
+      <mat-label>Prix indicatif</mat-label>
+      <input type="number" matInput formControlName="price" />
+      <mat-error *ngIf="formGroup.controls.price.hasError('required')"> Un prix indicatif est <strong>requis</strong></mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <mat-error *ngIf="errorCode === 400" class="error-msg">Informations incorrectes</mat-error>
+  <button mat-flat-button mat-dialog-close>Annuler</button>
+  <button mat-flat-button color="primary" [disabled]="!formGroup.valid" (click)="saveForm()">Ajouter</button>
+</mat-dialog-actions>

@@ -9,10 +9,10 @@ export class TimetableApiService {
   constructor(private backendService: BackendService) {}
 
   public getAll(): Observable<Timetable[]> {
-    return this.backendService.get<Timetable[]>(`timetable`);
+    return this.backendService.get<Timetable[]>(`timetables`);
   }
 
   public update(id: number, payload: UpdateTimetablePayload): Observable<Timetable> {
-    return this.backendService.put<Timetable, UpdateTimetablePayload>(`timetable/${id}`, payload);
+    return this.backendService.put<Timetable, UpdateTimetablePayload>(`timetables/${id}`, payload);
   }
 }

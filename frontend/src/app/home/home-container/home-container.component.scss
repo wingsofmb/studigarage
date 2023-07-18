@@ -1,9 +1,20 @@
 :host {
   display: block;
-  height: 100%;
+  background-color: #F2E9E4;
+
+  .navbar-container {
+    background-color: #C9ADA7CC;
+  }
 
   .navbar-icon {
     margin-right: 12px;
+  }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 48px - 80px);
   }
 
   .home-footer {

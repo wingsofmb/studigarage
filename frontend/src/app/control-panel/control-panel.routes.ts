@@ -6,6 +6,7 @@ import { ControlPanelContainerComponent } from 'src/app/control-panel/control-pa
 import { UserManagementComponent } from 'src/app/control-panel/user-management/user-management.component';
 import { TimetableManagementComponent } from 'src/app/control-panel/timetable-management/timetable-management.component';
 import { SettingManagementComponent } from 'src/app/control-panel/setting-management/setting-management.component';
+import { RepairServiceManagementComponent } from 'src/app/control-panel/repair-service-management/repair-service-management.component';
 
 export const controlPanelRoutes: Routes = [
   {
@@ -31,6 +32,11 @@ export const controlPanelRoutes: Routes = [
         path: 'timetable-management',
         canActivate: [rolesGuard([UserRoles.ADMIN], ['control-panel', '**'])],
         component: TimetableManagementComponent,
+      },
+      {
+        path: 'service-management',
+        canActivate: [rolesGuard([UserRoles.ADMIN], ['control-panel', '**'])],
+        component: RepairServiceManagementComponent,
       },
       { path: '', redirectTo: 'car-management', pathMatch: 'full' },
     ],

@@ -2,6 +2,7 @@ import { type Routes } from '@angular/router';
 import { logInGuard } from 'src/app/auth/_guards/log-in.guard';
 import { HomeContainerComponent } from 'src/app/home/home-container/home-container.component';
 import { HomePageComponent } from 'src/app/home/home-page/home-page.component';
+import { ServicesContainerComponent } from 'src/app/home/services-container/services-container.component';
 
 export const homeRoutes: Routes = [
   {
@@ -15,6 +16,10 @@ export const homeRoutes: Routes = [
       {
         path: 'offers',
         component: HomePageComponent,
+      },
+      {
+        path: 'services',
+        component: ServicesContainerComponent,
       },
       {
         path: 'contact',

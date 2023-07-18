@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ isCreation ? 'Créer' : 'Modifier' }} un compte utilisateur</h2>
+<h2 mat-dialog-title>{{ isCreation ? 'Ajouter' : 'Modifier' }} un compte utilisateur</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="userForm" class="user-form">
     <mat-form-field class="input-fields">
@@ -29,7 +29,7 @@
 </mat-dialog-content>
 <mat-dialog-actions [align]="'end'">
   <mat-error *ngIf="errorCode === 400" class="error-msg">Informations incorrectes</mat-error>
-  <mat-error *ngIf="!!errorCode && errorCode !== 400" class="error-msg">{{ isCreation ? 'Création' : 'Modification' }} impossible</mat-error>
-  <button mat-flat-button mat-dialog-close>Cancel</button>
-  <button mat-flat-button color="primary" [disabled]="!userForm.valid" (click)="saveForm()">{{ isCreation ? 'Créer' : 'Modifier' }}</button>
+  <mat-error *ngIf="!!errorCode && errorCode !== 400" class="error-msg">{{ isCreation ? 'Ajout' : 'Modification' }} impossible</mat-error>
+  <button mat-flat-button mat-dialog-close>Annuler</button>
+  <button mat-flat-button color="primary" [disabled]="!userForm.valid" (click)="saveForm()">{{ isCreation ? 'Ajouter' : 'Modifier' }}</button>
 </mat-dialog-actions>

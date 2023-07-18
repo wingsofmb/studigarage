@@ -9,11 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { Subject, catchError, of, takeUntil } from 'rxjs';
 import { UserApiService } from 'src/data-layer/user/user-api.service';
 import { strongPasswordValidator } from 'src/app/auth/_services/form-validator.directive';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-upsert',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSnackBarModule],
   providers: [UserApiService],
   templateUrl: './user-upsert.component.html',
   styleUrls: ['./user-upsert.component.scss'],
@@ -33,6 +34,7 @@ export class UserUpsertComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: User | null,
     public dialogRef: MatDialogRef<UserUpsertComponent>,
     private userApiService: UserApiService,
+    private snackBar: MatSnackBar,
   ) {}
 
   public ngOnInit(): void {
@@ -66,7 +68,10 @@ export class UserUpsertComponent implements OnInit {
         }),
       )
       .subscribe((response) => {
-        if (response) this.dialogRef.close(response);
+        if (!response) return;
+        this.snackBar.open(this.data === null ? 'Utilisateur ajouté' : 'Utilisateur modifié', 'OK', { duration: 1000 });
+        this.errorCode = null;
+        this.dialogRef.close(response);
       });
   }
 }

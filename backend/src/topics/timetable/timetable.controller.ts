@@ -7,7 +7,7 @@ import { UpdateTimetableInputDto } from 'src/topics/timetable/dto/timetable.dto'
 import { TimetableService } from 'src/topics/timetable/timetable.service';
 import { UserRoles } from 'src/topics/user/role.enum';
 
-@Controller('api/timetable')
+@Controller('api/timetables')
 export class TimetableController {
   constructor(private readonly timetableService: TimetableService) {}
 
