@@ -17,6 +17,10 @@ events {
 	worker_connections <%= ENV['NGINX_WORKER_CONNECTIONS'] || 1024 %>;
 }
 
+upstream backend{
+    server https://studigarage-e3153807165e.herokuapp.com;
+}
+
 http {
 	gzip on;
 	gzip_comp_level 2;
@@ -27,6 +31,7 @@ http {
 
 	log_format l2met 'measure#nginx.service=$request_time request_id=$http_x_request_id';
 	access_log /dev/stdout l2met;
+	error_log /dev/stdout l2met;
 	# Remote IP, request path, HTTP status, & timestamp are all logged by Heroku Router, so not useful to include here.
 
 	include mime.types;
@@ -59,7 +64,7 @@ http {
       proxy_set_header Host $http_host;
       # If you have any long running API calls, the read timeout needs to be increased here
       # proxy_read_timeout 120s;
-      proxy_pass https://studigarage-e3153807165e.herokuapp.com;
+      proxy_pass https://backend/;
   	}
 
 		location / {
