@@ -70,6 +70,9 @@ const settingData: Prisma.SettingCreateInput[] = [{ address: '25 rue de la chaum
 
 async function main() {
   console.log(`Start seeding ...`);
+  const admin = await prisma.user.findUnique({ where: { id: 1 } });
+  if (admin) throw new Error(`Safety issue. You must not try to seed this database. An admin user was found`);
+
   for (const u of userData) {
     const user = await prisma.user.create({
       data: u,
