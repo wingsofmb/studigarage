@@ -68,6 +68,99 @@ const timeTableData: Prisma.TimetableCreateInput[] = [
 
 const settingData: Prisma.SettingCreateInput[] = [{ address: '25 rue de la chaumière, 75012 Paris', phone: '+33 1 02 03 04 05' }];
 
+const reviewData: Prisma.ReviewCreateInput[] = [
+  {
+    name: 'Alice',
+    comment: 'Excellente réparation, je recommande ce garage vivement.',
+    score: 5,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Bob',
+    comment: "Très déçu. Le service n'était pas à la hauteur de mes attentes.",
+    score: 2,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Charlotte',
+    comment: "J'ai acheté ma voiture ici, aucun problème pour le moment.",
+    score: 4,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'David',
+    comment: 'Service impeccable et réparation rapide.',
+    score: 5,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Eva',
+    comment: "Je suis déçue par le service, je m'attendais à mieux.",
+    score: 3,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Franck',
+    comment: 'Travail de qualité et personnel compétent.',
+    score: 4,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Gabrielle',
+    comment: "La voiture que j'ai achetée ici a des problèmes mécaniques réguliers.",
+    score: 2,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Hugo',
+    comment: 'La réparation a été rapide et efficace. Merci !',
+    score: 5,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Iris',
+    comment: "J'attends encore des nouvelles de la réparation de ma voiture...",
+    score: 3,
+    status: 'PENDING',
+  },
+  {
+    name: 'Julien',
+    comment: 'Très satisfait de mon achat, je reviendrai.',
+    score: 5,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Karine',
+    comment: 'Ma voiture a été mal réparée, je ne suis pas contente.',
+    score: 1,
+    status: 'REJECTED',
+  },
+  {
+    name: 'Lucas',
+    comment: 'Bon garage, travail sérieux et de qualité.',
+    score: 4,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Maelle',
+    comment: 'Je suis en attente de ma réparation depuis trop longtemps.',
+    score: 3,
+    status: 'PENDING',
+  },
+  {
+    name: 'Nathan',
+    comment: 'Très satisfait de la réparation, le prix était raisonnable.',
+    score: 4,
+    status: 'VALIDATED',
+  },
+  {
+    name: 'Olivia',
+    comment: "La voiture que j'ai achetée ici est une catastrophe.",
+    score: 1,
+    status: 'REJECTED',
+  },
+];
+
 async function main() {
   console.log(`Start seeding ...`);
   const admin = await prisma.user.findUnique({ where: { id: 1 } });
@@ -90,6 +183,10 @@ async function main() {
   for (const s of settingData) {
     const setting = await prisma.setting.create({ data: s });
     console.log(`Created setting with id: ${setting.id}`);
+  }
+  for (const r of reviewData) {
+    const review = await prisma.review.create({ data: r });
+    console.log(`Created review with id: ${review.id}`);
   }
   console.log(`Seeding finished.`);
 }

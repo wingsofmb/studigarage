@@ -1,5 +1,5 @@
 <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="navbar-container">
-  <img src="assets/logo/logo.svg" alt="logo v parrot" height="48px" />
+  <img src="assets/logo/image.png" alt="logo v parrot" height="48px" />
   <a mat-tab-link *ngFor="let tab of tabs$ | async" [active]="(activeLink$ | async) === tab.link" [routerLink]="tab.link" (click)="sendContact(tab)">
     <ng-template mat-tab-label [ngIf]="tab.icon">
       <mat-icon [fontIcon]="tab.icon" aria-hidden="false" class="navbar-icon"></mat-icon>
