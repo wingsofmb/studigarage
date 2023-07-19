@@ -9,7 +9,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RepairServiceApiService } from 'src/data-layer/repair-service/repair-service-api.service';
 import { RepairService } from 'src/data-layer/repair-service/repair-service.model';
 import { BehaviorSubject, Subject, switchMap, takeUntil } from 'rxjs';
-import { serviceThemeMapping } from 'src/data-layer/repair-service/repair-service-mapping';
+import { serviceThemeMapping } from 'src/data-layer/repair-service/service-theme-mapping';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';

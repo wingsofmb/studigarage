@@ -9,13 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { Subject, catchError, of, takeUntil } from 'rxjs';
-import { RepairServiceApiService } from 'src/data-layer/repair-service/repair-service-api.service';
-import { ServiceTheme } from 'src/data-layer/repair-service/service-theme.enum';
-import { serviceThemeMapping } from 'src/data-layer/repair-service/service-theme-mapping';
-import * as _ from 'lodash';
+import { ScoreComponent } from 'src/app/shared/score/score.component';
+import { ReviewApiService } from 'src/data-layer/review/review-api.service';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @Component({
-  selector: 'app-rs-upsert',
+  selector: 'app-upsert-review',
   standalone: true,
   imports: [
     CommonModule,
@@ -27,39 +26,43 @@ import * as _ from 'lodash';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatSelectModule,
+    ScoreComponent,
+    TextFieldModule,
   ],
-  providers: [RepairServiceApiService],
-  templateUrl: './rs-upsert.component.html',
-  styleUrls: ['./rs-upsert.component.scss'],
+  providers: [ReviewApiService],
+  templateUrl: './upsert-review.component.html',
+  styleUrls: ['./upsert-review.component.scss'],
 })
-export class RSUpsertComponent {
+export class UpsertReviewComponent {
   public errorCode: number | null = null;
+  public score$: Subject<number> = new Subject<number>();
   public formGroup = new FormGroup({
-    theme: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required, Validators.min(0)]),
+    score: new FormControl('', [Validators.required, Validators.min(0), Validators.max(5)]),
+    comment: new FormControl('', [Validators.required, Validators.min(0)]),
   });
-  public themeMapping = serviceThemeMapping;
-  public themes: string[] = [];
+
   private _destroy$: Subject<null> = new Subject();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: User | null,
-    public dialogRef: MatDialogRef<RSUpsertComponent>,
-    private repairServiceApiService: RepairServiceApiService,
+    public dialogRef: MatDialogRef<UpsertReviewComponent>,
+    private reviewApiService: ReviewApiService,
     private snackBar: MatSnackBar,
   ) {
-    this.themes = _.keys(ServiceTheme);
+    this.score$.pipe(takeUntil(this._destroy$)).subscribe((value: number) => {
+      this.formGroup.controls.score.setValue(`${value}`);
+    });
   }
 
   public saveForm(): void {
     if (this.formGroup.errors) return;
 
-    const theme = this.formGroup.value.theme as ServiceTheme;
     const name = this.formGroup.value.name as string;
-    const price = Number(this.formGroup.value.price);
-    const payload = { theme, name, price };
-    const upsert$ = this.repairServiceApiService.create(payload);
+    const score = Number(this.formGroup.value.score);
+    const comment = this.formGroup.value.comment as string;
+    const payload = { name, score, comment };
+    const upsert$ = this.reviewApiService.create(payload);
 
     upsert$
       .pipe(
@@ -71,7 +74,7 @@ export class RSUpsertComponent {
       )
       .subscribe((response) => {
         if (!response) return;
-        this.snackBar.open('Service de réparation ajouté', 'OK', { duration: 1000 });
+        this.snackBar.open('Merci pour votre avis.', 'OK', { duration: 1000 });
         this.dialogRef.close(response);
       });
   }

@@ -34,13 +34,20 @@
 
 <mat-divider></mat-divider>
 
-<div class="presentation-block">
-  <div class="left-side main-side">
-    <h1>Trouvez votre nouvelle voiture</h1>
-    <h4>Achat, reprise, financement</h4>
-    <a mat-raised-button [routerLink]="'/offers'">Tous nos véhicules</a>
+<div class="presentation-block review-block">
+  <div class="global-review">
+    <h1 class="title">Nos clients témoignent</h1>
+    <app-score [score]="reviewStats.averageScore" [fontSize]="36" class="global-score" />
+    <span class="global-total"> {{ reviewStats.averageScore }}/5 sur {{ reviewStats.amount }} avis</span>
   </div>
-  <div class="right-side">
-    <img src="assets/pictures/vente.jpeg" alt="vente voiture" class="home-pictures" />
+  <div class="review-list">
+    <div class="container" *ngFor="let review of lastReviews">
+      <div class="heading">
+        <span class="title">{{ review.name }} ({{ review.createdAt | date : 'fullDate' }})</span>
+        <app-score [score]="review.score" class="score"></app-score>
+      </div>
+      <div class="mat-elevation-z2 comment">{{ review.comment }}</div>
+    </div>
   </div>
+  <button mat-raised-button class="review-button" (click)="createReview()">Laisser un avis</button>
 </div>

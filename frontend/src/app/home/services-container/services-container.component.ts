@@ -6,7 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { RepairServiceApiService } from 'src/data-layer/repair-service/repair-service-api.service';
 import { RepairService } from 'src/data-layer/repair-service/repair-service.model';
 import { Subject, takeUntil } from 'rxjs';
-import { serviceThemeMapping } from 'src/data-layer/repair-service/repair-service-mapping';
+import { serviceThemeMapping } from 'src/data-layer/repair-service/service-theme-mapping';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ContactFormComponent } from 'src/app/shared/contact-form/contact-form.component';

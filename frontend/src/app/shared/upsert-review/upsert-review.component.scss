@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+
+  .form-container {
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+
+    .upper-row {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .title {
+      margin: 6px 0 28px;
+    }
+
+    .textarea-field {
+      flex-grow: 1;
+    }
+
+    .score-field {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 18px;
+    }
+  }
+
+  .custom-form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .input-fields {
+    margin: 6px 0;
+    width: 100%;
+  }
+}

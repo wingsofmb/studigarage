@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: row;
+
+  .star {
+    height: auto;
+    width: auto;
+  }
+
+  .editable {
+    cursor: pointer;
+  }
+}

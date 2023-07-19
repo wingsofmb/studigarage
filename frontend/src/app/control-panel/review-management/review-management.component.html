@@ -1,0 +1,109 @@
+<div class="mat-elevation-z8 review-management-container">
+  <div class="heading">
+    <h1 class="title">Avis et témoignages clients</h1>
+    <div class="controls">
+      <mat-form-field appearance="outline" class="search-bar">
+        <mat-label>Rechercher par auteur...</mat-label>
+        <input matInput [formControl]="searchBar" type="search" placeholder="Rechercher par auteur..." />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="select-filter">
+        <mat-label>Status</mat-label>
+        <mat-select [formControl]="statusFilter" required>
+          <mat-option [value]="'ALL'">Tous les status</mat-option>
+          <mat-option [value]="reviewStatus.PENDING"> {{ statusMapping[reviewStatus.PENDING] }}</mat-option>
+          <mat-option [value]="reviewStatus.REJECTED"> {{ statusMapping[reviewStatus.REJECTED] }}</mat-option>
+          <mat-option [value]="reviewStatus.VALIDATED"> {{ statusMapping[reviewStatus.VALIDATED] }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <span class="spacer"></span>
+      <button mat-flat-button color="primary" class="create-btn" (click)="createReview()">Ajouter un avis client</button>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="table-container" [trackBy]="trackByFunction">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Identifiant</th>
+      <td mat-cell *matCellDef="let review">{{ review.id }}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let review">
+        <span class="status-label" *ngIf="review.status === reviewStatus.PENDING">
+          <mat-icon class="pending-btn-icon">pending_actions</mat-icon>&nbsp;{{ statusMapping[review.status] }}
+        </span>
+        <span class="status-label" *ngIf="review.status === reviewStatus.REJECTED">
+          <mat-icon class="rejected-btn-icon">cancel</mat-icon>&nbsp;{{ statusMapping[review.status] }}
+        </span>
+        <span class="status-label" *ngIf="review.status === reviewStatus.VALIDATED">
+          <mat-icon class="validated-btn-icon">check_circle</mat-icon>&nbsp;{{ statusMapping[review.status] }}
+        </span>
+      </td>
+    </ng-container>
+
+    <!-- CreatedAt Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let review">{{ review.createdAt | date : 'short' }}</td>
+    </ng-container>
+
+    <!-- Score Column -->
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef>Note</th>
+      <td mat-cell *matCellDef="let review"><app-score [score]="review.score" [fontSize]="12"></app-score></td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Auteur</th>
+      <td mat-cell *matCellDef="let review">{{ review.name }}</td>
+    </ng-container>
+
+    <!-- Comment Column -->
+    <ng-container matColumnDef="comment">
+      <th mat-header-cell *matHeaderCellDef>Commentaire</th>
+      <td mat-cell *matCellDef="let review">{{ review.comment }}</td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let review">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="updateReview(review, reviewStatus.PENDING)">
+            <mat-icon class="pending-btn-icon">pending_actions</mat-icon>{{ statusMapping[reviewStatus.PENDING] }}
+          </button>
+          <button mat-menu-item (click)="updateReview(review, reviewStatus.REJECTED)">
+            <mat-icon class="rejected-btn-icon">cancel</mat-icon>{{ statusMapping[reviewStatus.REJECTED] }}
+          </button>
+          <button mat-menu-item (click)="updateReview(review, reviewStatus.VALIDATED)">
+            <mat-icon class="validated-btn-icon">check_circle</mat-icon>{{ statusMapping[reviewStatus.VALIDATED] }}
+          </button>
+          <button *ngIf="isAdmin" mat-menu-item [matMenuTriggerFor]="confirmationMenu">
+            <mat-icon class="delete-btn-icon">delete</mat-icon>Supprimer
+          </button>
+        </mat-menu>
+        <mat-menu #confirmationMenu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="deleteReview(review)">Supprimer</button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Sélectionnez une page de services de réparation"
+    class="paginator"
+  />
+</div>

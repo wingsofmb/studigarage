@@ -1,0 +1,18 @@
+<ng-template [ngIf]="readonly">
+  <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]" class="star" style="font-size: {{ fontSize }}px" [ngStyle]="score >= i ? { color: 'gold' } : {}"
+    >star</mat-icon
+  >
+</ng-template>
+
+<ng-template [ngIf]="!readonly">
+  <mat-icon
+    *ngFor="let i of [1, 2, 3, 4, 5]"
+    class="star editable"
+    style="font-size: {{ fontSize }}px"
+    (mouseenter)="tempScore = i"
+    (mouseleave)="tempScore = score || 0"
+    (click)="selectScore(i)"
+    [ngStyle]="tempScore >= i ? { color: 'gold' } : {}"
+    >star</mat-icon
+  >
+</ng-template>

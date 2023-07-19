@@ -18,3 +18,20 @@ export class UpdateReviewInputDto {
   @IsEnum(ReviewStatus)
   status: ReviewStatus;
 }
+
+export class GetAllInputDto {
+  @IsInt()
+  @Min(0)
+  @Max(100)
+  limit?: number;
+
+  @IsInt()
+  @Min(0)
+  @Max(5000)
+  offset?: number;
+}
+
+export interface GlobalReviewStats {
+  averageScore: number;
+  amount: number;
+}

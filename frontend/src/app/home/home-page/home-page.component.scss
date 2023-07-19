@@ -2,4 +2,79 @@
   display: flex;
   flex-direction: column;
   padding: 5vw;
+
+  .review-block {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    max-height: 50vh;
+
+    .global-review {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 32px;
+      margin: 24px;
+
+      .title {
+        margin: 0;
+        flex-grow: 1;
+      }
+
+      .global-score {
+        margin: 12px;
+      }
+
+      .global-total {
+        font-size: 22px;
+      }
+    }
+
+    .review-list {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        margin-bottom: 12px;
+        padding: 12px 24px;
+
+        .heading {
+          display: flex;
+          margin-bottom: 6px;
+          align-items: center;
+          width: 100%;
+
+          .title {
+            flex-grow: 1;
+            font-weight: 600;
+            text-decoration: underline;
+          }
+
+          .score {
+            margin-left: 24px;
+          }
+        }
+
+        .comment {
+          background-color: white;
+          border-radius: 6px;
+          border: 1px solid #9a8c98cc;
+          flex-grow: 1;
+          max-width: 40vw;
+          padding: 12px;
+        }
+      }
+    }
+
+    .review-button {
+      display: block;
+      width: 170px;
+      max-height: 48px;
+      margin: 6px auto;
+    }
+  }
 }

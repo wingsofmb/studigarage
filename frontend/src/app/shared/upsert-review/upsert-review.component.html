@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Laissez un avis</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="formGroup" class="form-container">
+    <div class="upper-row">
+      <mat-form-field class="input-fields">
+        <mat-label>Votre nom</mat-label>
+        <input type="text" matInput formControlName="name" cdkFocusInitial />
+        <mat-error *ngIf="formGroup.controls.name.hasError('required')"> Votre nom est <strong>requis</strong></mat-error>
+      </mat-form-field>
+
+      <app-score [readonly]="false" [fontSize]="30" (selectedScore)="score$.next($event)" class="input-fields score-field"></app-score>
+    </div>
+
+    <mat-form-field class="input-fields textarea-field">
+      <mat-label>Votre commentaire</mat-label>
+      <textarea
+        type="text"
+        matInput
+        formControlName="comment"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"
+      ></textarea>
+      <mat-error *ngIf="formGroup.controls.comment.hasError('required')"> Un commentaire est <strong>requis</strong></mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <mat-error *ngIf="errorCode === 400" class="error-msg">Informations incorrectes</mat-error>
+  <button mat-flat-button mat-dialog-close>Annuler</button>
+  <button mat-flat-button color="primary" [disabled]="!formGroup.valid" (click)="saveForm()">Ajouter</button>
+</mat-dialog-actions>
