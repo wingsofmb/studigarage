@@ -39,6 +39,9 @@ http {
 	server {
 		listen <%= ENV["PORT"] %>;
 		server_name _;
+		## Document root
+		root /app/frontend/dist/studifront;
+		index index.html;
 		keepalive_timeout 5;
 		client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
@@ -47,13 +50,10 @@ http {
 			return 301 https://$host$request_uri;
 		}
 
-		## Document root
-		root /app/frontend/dist/studifront;
-
 		# Redirect requests made to /api
     location /api {
-      # proxy_set_header X-Forwarded-For $remote_addr;
-      # proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      # proxy_set_header Host $http_host; # BUGGY, make 404 on redirection
       # If you have any long running API calls, the read timeout needs to be increased here
       # proxy_read_timeout 120s;
       proxy_pass https://studigarage-e3153807165e.herokuapp.com:443;
@@ -61,32 +61,11 @@ http {
 
 		location / {
 			## Clean URLs: match on extensionless requests.
-			# try_files $uri $uri/ $uri.html =404;
+			try_files $uri $uri/ $uri.html =404;
 
 			## Single-page app client-side routing: returns index.html if the requested path doesn't exist.
 			## When enabled, the client-side app must handle its own 404 errors.
-			# error_page 404 = /index.html;
+			error_page 404 /index.html;
 		}
-
-		## Define specific behaviors for sub directories and other locations.
-		# location /assets {
-		# 	expires 7d;
-		# }
-
-		## Custom error pages
-		# error_page 404 /404.html;
-		# error_page 500 /500.html;
 	}
-
-	## Canonical Host: redirect to a canonical hostname.
-	## Multiple server blocks may be used, one for each hostname to redirect from.
-	# server { 
-	# 	server_name some-other-name.example.com;
-	# 	return 301 https://canonical-name.example.com$request_uri;
-	# }
-	# server { 
-	# 	server_name yet-another-name.example.com;
-	# 	return 301 https://canonical-name.example.com$request_uri;
-	# }
-	# …
 }
