@@ -25,6 +25,10 @@ http {
 
 	server_tokens off;
 
+	log_format l2met 'measure#nginx.service=$request_time request_id=$http_x_request_id';
+	access_log /dev/stdout l2met;
+	# Remote IP, request path, HTTP status, & timestamp are all logged by Heroku Router, so not useful to include here.
+
 	include mime.types;
 	default_type application/octet-stream;
 	sendfile on;
@@ -35,7 +39,6 @@ http {
 	server {
 		listen <%= ENV["PORT"] %>;
 		server_name _;
-		index     index.html;
 		keepalive_timeout 5;
 		client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
@@ -47,9 +50,7 @@ http {
 		## Document root
 		root /app/frontend/dist/studifront;
 
-		port_in_redirect off;
-
-    # Redirect requests made to /api
+		# Redirect requests made to /api
     location /api/ {
       proxy_set_header X-Forwarded-For $remote_addr;
       proxy_set_header Host $http_host;
@@ -60,7 +61,7 @@ http {
 
 		location / {
 			## Clean URLs: match on extensionless requests.
-			try_files $uri $uri/ $uri.html /index.html;
+			# try_files $uri $uri/ $uri.html =404;
 
 			## Single-page app client-side routing: returns index.html if the requested path doesn't exist.
 			## When enabled, the client-side app must handle its own 404 errors.
