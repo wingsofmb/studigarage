@@ -13,11 +13,13 @@ import { TimetableApiService } from 'src/data-layer/timetable/timatable-api.serv
 import { Timetable } from 'src/data-layer/timetable/timetable.model';
 import { dayMapping, dayOrder } from 'src/data-layer/timetable/day-mapping.model';
 import { Days } from 'src/data-layer/timetable/day.enum';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ContactFormComponent } from 'src/app/shared/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-home-container',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatTabsModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MatTabsModule, MatIconModule, MatDialogModule],
   providers: [SettingApiService, TimetableApiService],
   templateUrl: './home-container.component.html',
   styleUrls: ['./home-container.component.scss'],
@@ -38,6 +40,7 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
     private timetableApiService: TimetableApiService,
     private cdr: ChangeDetectorRef,
     private router: Router,
+    public dialog: MatDialog,
   ) {
     const publicTabs: NavbarLink[] = [
       { link: 'home', label: 'Accueil', icon: 'home' },
@@ -99,5 +102,10 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this._destroy$.next(null);
+  }
+
+  public sendContact(tab: NavbarLink): void {
+    if (tab.link !== 'contact') return;
+    this.dialog.open(ContactFormComponent, { data: null });
   }
 }

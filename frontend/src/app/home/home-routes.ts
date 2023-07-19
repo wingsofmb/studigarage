@@ -22,10 +22,6 @@ export const homeRoutes: Routes = [
         component: ServicesContainerComponent,
       },
       {
-        path: 'contact',
-        component: HomePageComponent,
-      },
-      {
         path: 'control-panel',
         canActivateChild: [logInGuard],
         loadChildren: () => import('src/app/control-panel/control-panel.routes').then((mod) => mod.controlPanelRoutes),

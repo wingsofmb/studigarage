@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>Contactez-nous</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="formGroup" class="form-container">
+    <h2 class="section-title" style="grid-column: 1 /3; grid-row: 1">
+      Vos informations de contact
+      <mat-divider></mat-divider>
+    </h2>
+
+    <mat-form-field class="input-fields" style="grid-column: 1; grid-row: 2">
+      <mat-label>Prénom</mat-label>
+      <input type="text" matInput formControlName="firstName" cdkFocusInitial />
+      <mat-error *ngIf="formGroup.controls.firstName.hasError('required')"> Le Prénom est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-fields" style="grid-column: 2; grid-row: 2">
+      <mat-label>Nom</mat-label>
+      <input type="text" matInput formControlName="lastName" />
+      <mat-error *ngIf="formGroup.controls.lastName.hasError('required')"> Le nom est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-fields" style="grid-column: 1; grid-row: 4">
+      <mat-label>Email de contact</mat-label>
+      <input type="email" matInput formControlName="email" placeholder="Ex. employee1@studigarage.io" />
+      <mat-error *ngIf="formGroup.controls.email.hasError('email')"> Format d'email incorrect</mat-error>
+      <mat-error *ngIf="formGroup.controls.email.hasError('required')"> L'Email est <strong>requis</strong> </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-fields" style="grid-column: 2; grid-row: 4">
+      <mat-label>Téléphone de contact</mat-label>
+      <input type="tel" matInput formControlName="phone" placeholder="Ex. +33 1 02 03 04 05" />
+      <mat-error *ngIf="formGroup.controls.phone.hasError('pattern')">
+        Le téléphone doit être au format <strong>+33 1 02 03 04 05</strong>
+      </mat-error>
+      <mat-error *ngIf="formGroup.controls.phone.hasError('required')"> Le téléphone est <strong>requis</strong> </mat-error>
+    </mat-form-field>
+
+    <h2 style="grid-column: 1 /3; grid-row: 6">
+      Votre demande
+      <mat-divider></mat-divider>
+    </h2>
+
+    <mat-form-field class="input-fields" style="grid-column: 1 / 3; grid-row: 7">
+      <mat-label>Objet</mat-label>
+      <input type="text" matInput formControlName="subject" />
+      <mat-error *ngIf="formGroup.controls.subject.hasError('required')"> L'objet est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-fields" style="grid-column: 1 / 3; grid-row: 9">
+      <mat-label>Contenu</mat-label>
+      <textarea
+        type="text"
+        matInput
+        formControlName="content"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="10"
+      ></textarea>
+      <mat-error *ngIf="formGroup.controls.content.hasError('required')"> Le contenu est <strong>requis</strong></mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <button mat-flat-button mat-dialog-close>Annuler</button>
+  <button mat-flat-button color="primary" [disabled]="!formGroup.valid" (click)="saveForm()">Envoyer</button>
+</mat-dialog-actions>

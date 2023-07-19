@@ -8,11 +8,13 @@ import { RepairService } from 'src/data-layer/repair-service/repair-service.mode
 import { Subject, takeUntil } from 'rxjs';
 import { serviceThemeMapping } from 'src/data-layer/repair-service/repair-service-mapping';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ContactFormComponent } from 'src/app/shared/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-services-container',
   standalone: true,
-  imports: [CommonModule, MatExpansionModule, MatDividerModule, MatButtonModule],
+  imports: [CommonModule, MatExpansionModule, MatDividerModule, MatButtonModule, MatDialogModule],
   providers: [RepairServiceApiService],
   templateUrl: './services-container.component.html',
   styleUrls: ['./services-container.component.scss'],
@@ -25,7 +27,7 @@ export class ServicesContainerComponent implements OnInit, OnDestroy {
 
   private _destroy$: Subject<null> = new Subject();
 
-  constructor(private rsApiService: RepairServiceApiService) {}
+  constructor(private rsApiService: RepairServiceApiService, public dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.rsApiService
@@ -43,6 +45,6 @@ export class ServicesContainerComponent implements OnInit, OnDestroy {
   }
 
   public buy(service: RepairService): void {
-    console.log(service.id);
+    this.dialog.open(ContactFormComponent, { data: `${serviceThemeMapping[service.theme]} : ${service.name}` });
   }
 }
