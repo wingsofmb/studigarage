@@ -17,7 +17,14 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 })
 export class CarComponent {
   @Input()
-  public car: Car | null = null;
+  public set car(car: Car | null) {
+    this._car = car;
+    if (!car) return;
+    this.pictureUrl = car.carPictures[0]?.fileUrl ?? null;
+  }
+  public get car(): Car | null {
+    return this._car;
+  }
 
   @Input()
   public isManagement = false;
@@ -25,8 +32,11 @@ export class CarComponent {
   @Output()
   public refresh: EventEmitter<null> = new EventEmitter();
 
+  public pictureUrl: string | null = null;
   public gearBoxMapping = gearBoxMapping;
   public energyTypeMapping = energyTypeMapping;
+
+  private _car: Car | null = null;
 
   constructor(private dialog: MatDialog) {}
 

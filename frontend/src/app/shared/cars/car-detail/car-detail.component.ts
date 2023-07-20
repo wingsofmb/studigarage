@@ -48,6 +48,7 @@ export class CarDetailComponent {
         this.car = car;
         this.mainPicture = car.carPictures[0]?.fileUrl;
         this.pictures = car.carPictures.map((x: CarPicture) => x.fileUrl);
+        console.log('updatepostrefrest');
       });
   }
 
@@ -63,7 +64,13 @@ export class CarDetailComponent {
     if (this.roleService.isVisitor()) return;
     const dialog = this.dialog.open(CarUpsertComponent, { data: this.car });
 
-    dialog.afterClosed().pipe(takeUntil(this._destroy$)).subscribe(this.refresh$);
+    dialog
+      .afterClosed()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe(() => {
+        this.refresh$.next(null);
+        console.log('cast refresh');
+      });
   }
 
   public deleteCar(): void {

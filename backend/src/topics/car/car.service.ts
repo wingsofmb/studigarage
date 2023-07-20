@@ -56,6 +56,7 @@ export class CarService {
       skip,
       take: qp.limit,
       orderBy: [{ createdAt: 'desc' }],
+      include: { carPictures: true },
     });
 
     return { result, stats };
@@ -63,7 +64,7 @@ export class CarService {
 
   public async createCar(requestBody: CreateCarInputDto): Promise<Car> {
     const picturesData = requestBody.carPictures;
-    const carData = _.omit(requestBody, ['carPicture']);
+    const carData = _.omit(requestBody, ['carPictures']);
     const createdCar = await this.prismaService.car.create({ data: carData as Prisma.CarCreateInput });
     if (!picturesData?.length) return createdCar;
 
