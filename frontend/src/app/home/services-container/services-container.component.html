@@ -9,17 +9,28 @@
 
 <mat-divider style="margin: 18px 0"></mat-divider>
 
+<p class="price-warning" *ngIf="isXSmallBp">Les prix indiqués sont indicatifs</p>
+
 <div class="service-container">
   <mat-accordion>
     <mat-expansion-panel *ngFor="let theme of themes">
       <mat-expansion-panel-header>
         <mat-panel-title> {{ themeMapping[theme] }} </mat-panel-title>
-        <mat-panel-description> Cliquez pour découvrir nos services </mat-panel-description>
+        <mat-panel-description *ngIf="!isXSmallBp"> Cliquez pour découvrir nos services </mat-panel-description>
       </mat-expansion-panel-header>
       <div *ngFor="let service of groupedServices[theme]" (mouseenter)="hoverId = service.id" (mouseleave)="hoverId = null" class="service-line">
-        <span class="service-name">{{ service.name }}</span>
-        <span class="service-price">prix indicatif: {{ service.price }}€</span>
-        <button [ngStyle]="service.id === hoverId ? {} : { visibility: 'hidden' }" mat-flat-button class="service-buy-btn" (click)="buy(service)">
+        <span *ngIf="!isXSmallBp" class="service-name">{{ service.name }}</span>
+        <span *ngIf="isXSmallBp" class="service-name" role="button" aria-disabled="true" (keypress)="buy(service)" (click)="buy(service)">{{
+          service.name
+        }}</span>
+        <span class="service-price">{{ service.price }}€</span>
+        <button
+          *ngIf="!isXSmallBp"
+          [ngStyle]="service.id === hoverId ? {} : { visibility: 'hidden' }"
+          mat-flat-button
+          class="service-buy-btn"
+          (click)="buy(service)"
+        >
           Contacter nous
         </button>
       </div>

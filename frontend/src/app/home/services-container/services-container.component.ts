@@ -10,6 +10,7 @@ import { serviceThemeMapping } from 'src/data-layer/repair-service/service-theme
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ContactFormComponent } from 'src/app/shared/contact-form/contact-form.component';
+import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-services-container',
@@ -24,10 +25,12 @@ export class ServicesContainerComponent implements OnInit, OnDestroy {
   public groupedServices: { [key: string]: RepairService[] } = {};
   public themeMapping = serviceThemeMapping;
   public hoverId: number | null = null;
+  public isXSmallBp = false;
+  public breakpoints = Breakpoints;
 
   private _destroy$: Subject<null> = new Subject();
 
-  constructor(private rsApiService: RepairServiceApiService, public dialog: MatDialog) {}
+  constructor(private rsApiService: RepairServiceApiService, public dialog: MatDialog, private responsive: BreakpointObserver) {}
 
   public ngOnInit(): void {
     this.rsApiService
@@ -37,6 +40,14 @@ export class ServicesContainerComponent implements OnInit, OnDestroy {
         const grouped = _.groupBy(rs, 'theme');
         this.groupedServices = _.mapValues(grouped, (s: RepairService[]) => _.sortBy(s, 'name'));
         this.themes = _.keys(this.groupedServices);
+      });
+
+    this.responsive
+      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large])
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((state: BreakpointState) => {
+        const matchedBp = _.keys(state.breakpoints).filter((bp) => state.breakpoints[bp])[0];
+        this.isXSmallBp = matchedBp === Breakpoints.XSmall;
       });
   }
 
