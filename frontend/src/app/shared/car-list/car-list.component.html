@@ -1,0 +1,68 @@
+<!-- FILTER SECTION -->
+<div class="mat-elevation-z2 filter-section">
+  <!-- search bar -->
+  <mat-label class="new-filter">Filtrer par modèle ou Marque</mat-label>
+  <mat-form-field *ngIf="matchedBp !== breakpoints.XSmall" appearance="outline" class="search-bar">
+    <mat-label>Modèle / Marque ...</mat-label>
+    <input matInput [formControl]="searchBar" type="search" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <!-- price slider -->
+  <mat-label class="new-filter">Filtrer par prix</mat-label>
+  <mat-slider [min]="stats.minPriceLimit" [max]="stats.maxPriceLimit" [discrete]="true">
+    <input [formControl]="minPriceSlider" matSliderStartThumb />
+    <input [formControl]="maxPriceSlider" matSliderEndThumb />
+  </mat-slider>
+
+  <!-- mileage slider -->
+  <mat-label class="new-filter">Filtrer par Kilométrage</mat-label>
+  <mat-slider [min]="stats.minMileageLimit" [max]="stats.maxMileageLimit" [discrete]="true">
+    <input [formControl]="minMileageSlider" matSliderStartThumb />
+    <input [formControl]="maxMileageSlider" matSliderEndThumb />
+  </mat-slider>
+
+  <!-- firstCirculationDate slider -->
+  <mat-label class="new-filter">Filtrer par date</mat-label>
+  <mat-slider [min]="stats.minCirculationDateLimit" [max]="now | date : 'yyyy'" [discrete]="true">
+    <input [formControl]="minCirculationDateSlider" matSliderStartThumb />
+    <input [formControl]="maxCirculationDateSlider" matSliderEndThumb />
+  </mat-slider>
+
+  <!-- gearBox select -->
+  <mat-label class="new-filter">Filtrer par boite</mat-label>
+  <mat-form-field>
+    <mat-label>Type de boite</mat-label>
+    <mat-select [formControl]="gearBoxTypeSelect" required>
+      <mat-option [value]="'ALL'">Tous</mat-option>
+      <mat-option *ngFor="let gearBox of gearBoxKeys" [value]="gearBox"> {{ gearBoxMapping[gearBox] }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- energyType select -->
+  <mat-label class="new-filter">Filtrer par moteur</mat-label>
+  <mat-form-field>
+    <mat-label>Type de moteur</mat-label>
+    <mat-select [formControl]="energyTypeSelect" required>
+      <mat-option [value]="'ALL'">Tous</mat-option>
+      <mat-option *ngFor="let energy of energyTypeKeys" [value]="energy"> {{ energyTypeMapping[energy] }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<!-- CAR LIST SECTION -->
+<div class="content-section">
+  <div class="car-list">
+    <!-- CAR ITEMS -->
+    <app-car class="mat-elevation-z1" *ngFor="let car of cars; trackBy: trackByFunction" [car]="car"></app-car>
+  </div>
+  <!-- PAGINATOR -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageIndex]="offsetFilter$.value"
+    [pageSize]="limitFilter$.value"
+    [length]="stats.count"
+    showFirstLastButtons
+    aria-label="Sélectionnez une page de services de réparation"
+    class="paginator"
+  />
+</div>

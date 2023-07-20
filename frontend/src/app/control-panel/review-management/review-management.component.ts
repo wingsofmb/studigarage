@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ReviewApiService } from 'src/data-layer/review/review-api.service';
 import { Review } from 'src/data-layer/review/review.model';
-import { reviewStatusMapping } from 'src/data-layer/review/review-status-mapping';
+import { reviewStatusActionMapping, reviewStatusMapping } from 'src/data-layer/review/review-status-mapping';
 import { ReviewStatus } from 'src/data-layer/review/review-status.enum';
 import { RolesService } from 'src/app/auth/_services/roles.service';
 import { ScoreComponent } from 'src/app/shared/score/score.component';
@@ -47,6 +47,7 @@ export class ReviewManagementComponent implements AfterViewInit, OnDestroy {
   public displayedColumns: string[] = ['status', 'createdAt', 'score', 'name', 'comment', 'action'];
   public dataSource: MatTableDataSource<Review> = new MatTableDataSource<Review>([]);
   public statusMapping = reviewStatusMapping;
+  public reviewStatusActionMapping = reviewStatusActionMapping;
   public reviewStatus = ReviewStatus;
   public searchBar = new FormControl('');
   public statusFilter = new FormControl('');

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, Review, ReviewStatus } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { GetAllInputDto, GlobalReviewStats, UpdateReviewInputDto } from 'src/topics/review/dto/review.dto';
+import { GetAllReviewInputDto, GlobalReviewStats, UpdateReviewInputDto } from 'src/topics/review/dto/review.dto';
 
 @Injectable()
 export class ReviewService {
@@ -11,7 +11,7 @@ export class ReviewService {
     return this.prismaService.review.findUnique({ where: { id } });
   }
 
-  public async fetchReviews(status: ReviewStatus[], qp: GetAllInputDto): Promise<Review[]> {
+  public async fetchReviews(status: ReviewStatus[], qp: GetAllReviewInputDto): Promise<Review[]> {
     const skip = qp.offset * qp.limit;
     const where = {
       status: { in: status },

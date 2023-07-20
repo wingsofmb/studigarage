@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import { carData } from './seed-data/car-data-seed';
 
 const prisma = new PrismaClient();
 
@@ -187,6 +188,10 @@ async function main() {
   for (const r of reviewData) {
     const review = await prisma.review.create({ data: r });
     console.log(`Created review with id: ${review.id}`);
+  }
+  for (const c of carData) {
+    const car = await prisma.car.create({ data: c });
+    console.log(`Created car with id: ${car.id}`);
   }
   console.log(`Seeding finished.`);
 }

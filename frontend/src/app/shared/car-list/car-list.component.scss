@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  
+  .filter-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 200px;
+    width: 200px;
+    color: rgb(0 0 0 / 60%);
+    padding: 6px;
+    background-color: white;
+    border-radius: 6px;
+
+    * {
+      // outline: 1px solid red;
+    }
+
+    .new-filter {
+      margin: 6px 0 12px;
+    }
+  }
+
+  .content-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px;
+
+    .car-list {
+      display: flex;
+      flex-flow: wrap;
+      flex-direction: row;
+      flex-grow: 1;
+    }
+  }
+
+  .paginator {
+    background-color: #F2E9E4;
+  }
+}

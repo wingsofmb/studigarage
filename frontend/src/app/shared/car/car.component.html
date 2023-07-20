@@ -1,0 +1,14 @@
+<ng-template [ngIf]="car">
+  <div class="img-replacement"></div>
+  <img class="picture" src="https://image-annonce.lacentrale.fr/352x264/E112385352_STANDARD_0.jpg?uncache=1686661831" alt="image de la voiture" />
+  <p class="brand">{{ car.brand }}</p>
+  <p class="model">{{ car.model }}</p>
+  <mat-divider class="divider"></mat-divider>
+  <div class="caracteristics">
+    <p>Année: {{ car.firstCirculationDate | date : 'M/yyyy' }}</p>
+    <p>Kms: {{ car.mileage }}</p>
+    <p>{{ gearBoxMapping[car.gearBox] }}</p>
+    <p>{{ energyTypeMapping[car.energy] }}</p>
+  </div>
+  <button mat-flat-button color="primary" class="detail-button" (click)="seeCarDetail()">{{ car.price }}€</button>
+</ng-template>

@@ -19,7 +19,7 @@ export class UpdateReviewInputDto {
   status: ReviewStatus;
 }
 
-export class GetAllInputDto {
+export class GetAllReviewInputDto {
   @IsInt()
   @Min(0)
   @Max(100)

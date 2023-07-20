@@ -1,6 +1,38 @@
 :host {
-  display: block;
-  height: 100%;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
   padding: 18px 0;
+
+  .car-management-container {
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    min-width: 90%;
+    max-width: 90%;
+    margin-bottom: 28px;
+    padding: 32px;
+    overflow: hidden;
+  }
+
+  .heading {
+    display: block;
+    margin-bottom: 12px;
+
+    .controls {
+      display: flex;
+      flex-direction: row;
+
+      .spacer {
+        flex-grow: 1;
+      }
+
+      .create-btn {
+        display: block;
+        margin-left: auto;
+      }
+    }
+  }
 }

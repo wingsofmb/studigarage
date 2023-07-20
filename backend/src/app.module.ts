@@ -9,9 +9,10 @@ import { SettingModule } from 'src/topics/setting/setting.module';
 import { TimetableModule } from 'src/topics/timetable/timetable.module';
 import { RepairServiceModule } from 'src/topics/repair-service/repair-service.module';
 import { ReviewModule } from 'src/topics/review/review.module';
+import { CarModule } from 'src/topics/car/car.module';
 
 @Module({
-  imports: [UserModule, AuthModule, SettingModule, TimetableModule, RepairServiceModule, ReviewModule],
+  imports: [UserModule, AuthModule, SettingModule, TimetableModule, RepairServiceModule, ReviewModule, CarModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

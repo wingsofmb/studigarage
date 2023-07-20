@@ -85,3 +85,59 @@ model Review {
   score Int
   status ReviewStatus
 }
+
+enum EnergyType {
+  DIESEL
+  PETROL
+  ELECTRIC
+  HYBRID
+}
+
+enum GearBoxType {
+  MANUAL
+  AUTOMATIC
+}
+
+enum OptionTheme {
+  INSIDE
+  OUTSIDE
+  SAFETY
+  OTHER
+}
+
+model Car {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  brand String
+  model String
+  
+  price Int
+  firstCirculationDate DateTime
+  mileage Int
+  energy EnergyType
+  gearBox GearBoxType
+  insideColor String
+  outsideColor String
+  carOptions CarOptions[]
+  carPictures carPicture[]
+}
+
+model CarOptions {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String
+  theme OptionTheme
+  car Car @relation(fields: [carId], references: [id])
+  carId Int
+}
+
+model carPicture {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  fileUrl String
+  car Car @relation(fields: [carId], references: [id])
+  carId Int
+}

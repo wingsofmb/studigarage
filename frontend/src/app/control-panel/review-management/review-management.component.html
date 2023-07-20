@@ -79,13 +79,13 @@
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
           <button mat-menu-item (click)="updateReview(review, reviewStatus.PENDING)">
-            <mat-icon class="pending-btn-icon">pending_actions</mat-icon>{{ statusMapping[reviewStatus.PENDING] }}
+            <mat-icon class="pending-btn-icon">pending_actions</mat-icon>{{ reviewStatusActionMapping[reviewStatus.PENDING] }}
           </button>
           <button mat-menu-item (click)="updateReview(review, reviewStatus.REJECTED)">
-            <mat-icon class="rejected-btn-icon">cancel</mat-icon>{{ statusMapping[reviewStatus.REJECTED] }}
+            <mat-icon class="rejected-btn-icon">cancel</mat-icon>{{ reviewStatusActionMapping[reviewStatus.REJECTED] }}
           </button>
           <button mat-menu-item (click)="updateReview(review, reviewStatus.VALIDATED)">
-            <mat-icon class="validated-btn-icon">check_circle</mat-icon>{{ statusMapping[reviewStatus.VALIDATED] }}
+            <mat-icon class="validated-btn-icon">check_circle</mat-icon>{{ reviewStatusActionMapping[reviewStatus.VALIDATED] }}
           </button>
           <button *ngIf="isAdmin" mat-menu-item [matMenuTriggerFor]="confirmationMenu">
             <mat-icon class="delete-btn-icon">delete</mat-icon>Supprimer

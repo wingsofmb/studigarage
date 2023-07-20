@@ -1,1 +1,12 @@
-<p>car-management works!</p>
+<div class="mat-elevation-z8 car-management-container">
+  <!-- HEADER -->
+  <div class="heading">
+    <h1 class="title">Gestion des annonces</h1>
+    <div class="controls">
+      <span class="spacer"></span>
+      <button mat-flat-button color="primary" class="create-btn" (click)="createCar()">Ajouter une annonce</button>
+    </div>
+  </div>
+
+  <app-car-list></app-car-list>
+</div>
