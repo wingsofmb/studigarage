@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Car } from 'src/data-layer/car/car.model';
 import { gearBoxMapping } from 'src/data-layer/car/gear-box-mapping';
@@ -22,12 +22,18 @@ export class CarComponent {
   @Input()
   public isManagement = false;
 
+  @Output()
+  public refresh: EventEmitter<null> = new EventEmitter();
+
   public gearBoxMapping = gearBoxMapping;
   public energyTypeMapping = energyTypeMapping;
 
   constructor(private dialog: MatDialog) {}
 
   public seeCarDetail(): void {
-    this.dialog.open(CarDetailComponent, { data: { id: this.car?.id, isManagement: this.isManagement } });
+    const dialog = this.dialog.open(CarDetailComponent, { data: { id: this.car?.id, isManagement: this.isManagement } });
+    dialog.afterClosed().subscribe((res: { forceRefresh: boolean }) => {
+      if (res?.forceRefresh) this.refresh.next(null);
+    });
   }
 }

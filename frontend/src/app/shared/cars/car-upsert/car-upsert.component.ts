@@ -79,6 +79,10 @@ export class CarUpsertComponent implements OnInit {
     gearBox: new FormControl('', [Validators.required]),
     insideColor: new FormControl('', [Validators.required]),
     outsideColor: new FormControl('', [Validators.required]),
+    pic1: new FormControl(''),
+    pic2: new FormControl(''),
+    pic3: new FormControl(''),
+    pic4: new FormControl(''),
   });
   public matchedBp = '';
   public breakpoints = Breakpoints;
@@ -103,10 +107,15 @@ export class CarUpsertComponent implements OnInit {
   public ngOnInit(): void {
     this.isCreation = this.data === null;
     if (this.data !== null) {
+      const pictures = this.data.carPictures;
       this.formGroup.setValue({
         ..._.pick(this.data, ['brand', 'model', 'firstCirculationDate', 'energy', 'gearBox', 'insideColor', 'outsideColor']),
         price: `${this.data.price}`,
         mileage: `${this.data.mileage}`,
+        pic1: pictures[0]?.fileUrl ?? '',
+        pic2: pictures[1]?.fileUrl ?? '',
+        pic3: pictures[2]?.fileUrl ?? '',
+        pic4: pictures[3]?.fileUrl ?? '',
         // firstCirculationDate: DateTime.fromISO(this.data.firstCirculationDate).toJSDate as unknown as string,
       });
     }
@@ -125,6 +134,20 @@ export class CarUpsertComponent implements OnInit {
     const gearBox = this.formGroup.value.gearBox as GearBoxType;
     const insideColor = this.formGroup.value.insideColor as string;
     const outsideColor = this.formGroup.value.outsideColor as string;
+    const pic1 = this.formGroup.value.pic1 as string;
+    const pic2 = this.formGroup.value.pic2 as string;
+    const pic3 = this.formGroup.value.pic3 as string;
+    const pic4 = this.formGroup.value.pic4 as string;
+    const getId = (index: number) => this.data?.carPictures[index]?.id;
+    const carPictures = _.filter(
+      [
+        { fileUrl: pic1, ...(getId(0) ? { id: getId(0) } : {}) },
+        { fileUrl: pic2, ...(getId(1) ? { id: getId(1) } : {}) },
+        { fileUrl: pic3, ...(getId(2) ? { id: getId(2) } : {}) },
+        { fileUrl: pic4, ...(getId(3) ? { id: getId(3) } : {}) },
+      ],
+      (cp) => cp.fileUrl,
+    );
     const payload = {
       brand,
       model,
@@ -135,6 +158,7 @@ export class CarUpsertComponent implements OnInit {
       gearBox,
       insideColor,
       outsideColor,
+      carPictures,
     };
     const upsert$ = this.data === null ? this.carApiService.create(payload) : this.carApiService.update(this.data?.id, payload);
 

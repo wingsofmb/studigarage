@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { Car, EnergyType, GearBoxType } from '@prisma/client';
+import { Car, EnergyType, GearBoxType, Prisma, carPicture } from '@prisma/client';
 import { CarGetAllStats, CreateCarInputDto, GetAllCarInputDto, UpdateCarInputDto } from 'src/topics/car/dto/car.dto';
 import * as _ from 'lodash';
 import { DateTime } from 'luxon';
@@ -12,7 +12,7 @@ export class CarService {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async fetchCarByPk(id: number): Promise<Car> {
-    return this.prismaService.car.findUnique({ where: { id } });
+    return this.prismaService.car.findUnique({ where: { id }, include: { carPictures: true } });
   }
 
   public validateGetAllQP(params): void {
@@ -62,12 +62,48 @@ export class CarService {
   }
 
   public async createCar(requestBody: CreateCarInputDto): Promise<Car> {
-    return this.prismaService.car.create({ data: requestBody });
+    const picturesData = requestBody.carPictures;
+    const carData = _.omit(requestBody, ['carPicture']);
+    const createdCar = await this.prismaService.car.create({ data: carData as Prisma.CarCreateInput });
+    if (!picturesData?.length) return createdCar;
+
+    await this.prismaService.carPicture.createMany({
+      data: picturesData.map((pd) => ({
+        fileUrl: pd.fileUrl,
+        carId: createdCar.id,
+      })),
+    });
+    return this.fetchCarByPk(createdCar.id);
   }
 
   public async updateCar(id: number, requestBody: UpdateCarInputDto): Promise<Car> {
     await this.prismaService.car.findUniqueOrThrow({ where: { id } });
-    return this.prismaService.car.update({ where: { id }, data: requestBody });
+
+    const picturesData = requestBody.carPictures;
+    const carData = _.omit(requestBody, ['carPictures']);
+    await this.prismaService.car.update({ where: { id }, data: carData as Prisma.CarUpdateInput });
+
+    const currentPictures = (await this.prismaService.carPicture.findMany({ where: { carId: id } })).map((pic) => _.pick(pic, ['id', 'fileUrl']));
+    const picturesToCompare = picturesData.map((pic) => _.pick(pic, ['id', 'fileUrl']));
+    console.log('currentPictures', currentPictures);
+
+    const toAdd = _.filter(picturesToCompare, (pic) => !pic.id).map((pic) => ({ ...pic, carId: id }));
+    const toRemove = _.filter(currentPictures, (pic) => !_.compact(picturesToCompare.map((p) => p.id)).includes(pic.id)); // OK
+    const toUpdate = _.filter(currentPictures, (pic) => {
+      const match = _.filter(picturesToCompare, (x) => x.id).find((it: carPicture) => it.id === pic.id);
+      return match && (match as carPicture).fileUrl !== pic.fileUrl;
+    }).map((currentToUpdate) => picturesToCompare.find((it) => it.id === currentToUpdate.id));
+
+    console.log('toAdd', toAdd);
+    console.log('toRemove', toRemove);
+    console.log('toUpdate', toUpdate);
+    if (toAdd.length) await this.prismaService.carPicture.createMany({ data: toAdd as Prisma.carPictureCreateManyInput[] });
+    if (toRemove.length) await this.prismaService.carPicture.deleteMany({ where: { id: { in: toRemove.map((x) => x.id) } } });
+    if (toUpdate.length) {
+      for (const up of toUpdate) await this.prismaService.carPicture.updateMany({ data: up, where: { id: up.id } });
+    }
+
+    return this.fetchCarByPk(id);
   }
 
   public async deleteCar(id: number): Promise<Car> {

@@ -1,5 +1,6 @@
-import { EnergyType } from 'src/data-layer/car/energy-type.enum';
-import { GearBoxType } from 'src/data-layer/car/gear-box-type.enum';
+import { CarPicture } from 'src/data-layer/car/car-picture.model';
+import type { EnergyType } from 'src/data-layer/car/energy-type.enum';
+import type { GearBoxType } from 'src/data-layer/car/gear-box-type.enum';
 
 export interface Car {
   id: number;
@@ -14,6 +15,5 @@ export interface Car {
   gearBox: GearBoxType;
   insideColor: string;
   outsideColor: string;
-  // carOptions CarOptions[]
-  // carPictures carPicture[]
+  carPictures: CarPicture[];
 }

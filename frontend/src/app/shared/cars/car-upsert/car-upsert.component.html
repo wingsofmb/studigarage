@@ -74,6 +74,30 @@
       <input type="text" matInput formControlName="insideColor" />
       <mat-error *ngIf="formGroup.controls.insideColor.hasError('required')"> La couleur est <strong>requise</strong></mat-error>
     </mat-form-field>
+
+    <!-- Picture 1 Column -->
+    <mat-form-field class="input-fields">
+      <mat-label>Image 1</mat-label>
+      <input type="text" matInput formControlName="pic1" />
+    </mat-form-field>
+
+    <!-- Picture 2 Column -->
+    <mat-form-field class="input-fields">
+      <mat-label>Image 2</mat-label>
+      <input type="text" matInput formControlName="pic2" />
+    </mat-form-field>
+
+    <!-- Picture 3 Column -->
+    <mat-form-field class="input-fields">
+      <mat-label>Image 3</mat-label>
+      <input type="text" matInput formControlName="pic3" />
+    </mat-form-field>
+
+    <!-- Picture 4 Column -->
+    <mat-form-field class="input-fields">
+      <mat-label>Image 4</mat-label>
+      <input type="text" matInput formControlName="pic4" />
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 

@@ -1,4 +1,4 @@
-import { EnergyType, GearBoxType } from '@prisma/client';
+import { EnergyType, GearBoxType, carPicture } from '@prisma/client';
 import { IsString, IsEnum, IsInt, Min, IsDateString } from 'class-validator';
 
 export class CreateCarInputDto {
@@ -31,8 +31,7 @@ export class CreateCarInputDto {
   @IsString()
   outsideColor: string;
 
-  // carOptions CarOptions[]
-  // carPictures carPicture[]
+  carPictures?: Array<Partial<carPicture>>;
 }
 
 export type UpdateCarInputDto = CreateCarInputDto;

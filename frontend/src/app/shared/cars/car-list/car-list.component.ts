@@ -90,13 +90,13 @@ export class CarListComponent implements AfterViewInit, OnDestroy {
   public EnergyType = EnergyType;
   public energyTypeKeys = _.keys(EnergyType);
   public energyTypeMapping = energyTypeMapping;
+  public refresh$: Subject<null> = new Subject();
 
   public matchedBp = '';
   public breakpoints = Breakpoints;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  private refresh$: Subject<null> = new Subject();
   private _destroy$: Subject<null> = new Subject();
 
   constructor(private carApiService: CarApiService, private responsive: BreakpointObserver) {

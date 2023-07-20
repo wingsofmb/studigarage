@@ -53,7 +53,13 @@
 <div class="content-section">
   <div class="car-list">
     <!-- CAR ITEMS -->
-    <app-car class="mat-elevation-z1" *ngFor="let car of cars; trackBy: trackByFunction" [car]="car" [isManagement]="isManagement"></app-car>
+    <app-car
+      class="mat-elevation-z1"
+      *ngFor="let car of cars; trackBy: trackByFunction"
+      [car]="car"
+      [isManagement]="isManagement"
+      (refresh)="this.refresh$.next(null)"
+    ></app-car>
   </div>
 
   <!-- PAGINATOR -->

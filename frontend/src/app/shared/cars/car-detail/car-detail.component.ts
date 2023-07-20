@@ -11,6 +11,8 @@ import { ContactFormComponent } from 'src/app/shared/contact-form/contact-form.c
 import { DateTime } from 'luxon';
 import { RolesService } from 'src/app/auth/_services/roles.service';
 import { CarUpsertComponent } from 'src/app/shared/cars/car-upsert/car-upsert.component';
+import { ConfirmModalComponent } from 'src/app/shared/confirm-modal/confirm-modal.component';
+import { CarPicture } from 'src/data-layer/car/car-picture.model';
 
 @Component({
   selector: 'app-car-detail',
@@ -22,13 +24,8 @@ import { CarUpsertComponent } from 'src/app/shared/cars/car-upsert/car-upsert.co
 })
 export class CarDetailComponent {
   public car: Car | null = null;
-  public mainPicture = 'https://image-annonce.lacentrale.fr/352x264/E112385352_STANDARD_0.jpg?uncache=1686661831';
-  public pictures = [
-    'https://image-annonce.lacentrale.fr/352x264/E112385352_STANDARD_0.jpg?uncache=1686661831',
-    'https://image-annonce.lacentrale.fr/352x264/E112447020_STANDARD_0.jpg?uncache=1686752883',
-    'https://image-annonce.lacentrale.fr/352x264/E111130435_STANDARD_0.jpg?uncache=1677295281',
-    'https://image-annonce.lacentrale.fr/352x264/E112606627_STANDARD_0.jpg?uncache=1689603531',
-  ];
+  public mainPicture = '';
+  public pictures: string[] = [];
   public gearBoxMapping = gearBoxMapping;
   public energyTypeMapping = energyTypeMapping;
 
@@ -47,7 +44,11 @@ export class CarDetailComponent {
         switchMap(() => this.carApiService.get(this.data.id)),
         takeUntil(this._destroy$),
       )
-      .subscribe((car: Car) => (this.car = car));
+      .subscribe((car: Car) => {
+        this.car = car;
+        this.mainPicture = car.carPictures[0]?.fileUrl;
+        this.pictures = car.carPictures.map((x: CarPicture) => x.fileUrl);
+      });
   }
 
   public contact(): void {
@@ -63,5 +64,21 @@ export class CarDetailComponent {
     const dialog = this.dialog.open(CarUpsertComponent, { data: this.car });
 
     dialog.afterClosed().pipe(takeUntil(this._destroy$)).subscribe(this.refresh$);
+  }
+
+  public deleteCar(): void {
+    const dialog = this.dialog.open(ConfirmModalComponent);
+    dialog
+      .afterClosed()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((confirmed: boolean) => {
+        console.log(confirmed);
+        if (confirmed && this.car) {
+          this.carApiService
+            .delete(this.car.id)
+            .pipe(takeUntil(this._destroy$))
+            .subscribe(() => this.dialogRef.close({ forceRefresh: true }));
+        }
+      });
   }
 }
