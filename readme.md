@@ -7,6 +7,10 @@
 - Install nvm `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash`
 - Install docker
 
+# Please 
+
+- Send a mail / message as soon as the project has been corrected. Heroku subscription is not 100% free.
+
 
 # Initialize project Run project
 
@@ -27,6 +31,7 @@
 
 - Run frontend `yarn serve:front`
 - You can now target localhost:4200
+- Deployed on [HEROKU](https://studifront-b28697fd877e.herokuapp.com/)
 
 ## credentials
 
