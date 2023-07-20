@@ -18,6 +18,8 @@
 ## backend
 
 - Start DB container using `docker-compose -f backend/docker-compose.yml up`
+- Init your DB `npx prisma migrate dev`
+- Seed your DB with `npx prisma db seed` first time, or `npx prisma migration reset` il you want to reseed
 - Run backend  `yarn serve:back`
 - You can now target localhost:3000
 
@@ -30,28 +32,24 @@
 
 - admin@studigarage.io -- P@ssword1
 - employee1@studigarage.io -- P@ssword2
+- If you want to reset admin password, `yarn run generate:pwd <mypassword>`. Then, inside docker container, you can update it directly with psql command.
 
-### Run tests
+### Run Linter
 
-- Be sure that containers are started.
+- Full project linting run on pre-commit hook thanks to Husky.
+- You can manually lint with `yarn workspace <studifront|studiback> lint` or by running commands in the corresponding project directory
 
 ```bash
 # unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+$ yarn run lint
 ```
 
 # Deploy
 
 ```bash
 # deploy backend
-$ git push heroku-studigarage
+$ git push heroku-studigarage main
 
 # deploy frontend
-$ git push heroku-studifront
+$ git push heroku-studifront main
 ```
