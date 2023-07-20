@@ -55,6 +55,7 @@
     <!-- CAR ITEMS -->
     <app-car class="mat-elevation-z1" *ngFor="let car of cars; trackBy: trackByFunction" [car]="car"></app-car>
   </div>
+
   <!-- PAGINATOR -->
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"

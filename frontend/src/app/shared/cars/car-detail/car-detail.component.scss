@@ -1,0 +1,72 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 80vw;
+  width: 100%;
+  min-height: 79vh;
+  height: 100%;
+
+
+  .custom-modal-content {
+    display: flex;
+    flex-direction: row;
+
+    .picture-container {
+      flex-grow: 1;
+      max-width: 50%;
+      padding: 6px;
+
+      .main-picture {
+        width: 100%;
+        border-radius: 3px;
+        object-fit: cover;
+      }
+
+      .other-pictures-container {
+        display: flex;
+        flex-flow: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        .small-pictures {
+          width: 45%;
+          padding: 3px;
+          cursor: pointer;
+        }
+      }
+    }
+  
+    .car-detail-container {
+      display: flex;
+      max-width: 50%;
+      flex-grow: 1;
+      padding: 6px;
+      flex-direction: column;
+      color: rgb(0 0 0 / 80%);
+  
+      .grid-layout {
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(9, 30px);
+        border: 1px solid #4A4E69;
+
+        .grid-item {
+          padding: 3px;
+
+          &.left {
+            font-weight: 500;
+            color: rgb(0 0 0 / 80%);
+            padding-left: 12px;
+          }
+
+          &.right {
+            color: rgb(0 0 0 / 60%);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+          }
+        }
+      }
+    }
+  }
+}

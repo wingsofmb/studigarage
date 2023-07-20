@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, TrackByFunction, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, TrackByFunction, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
@@ -21,7 +21,7 @@ import { CarGetAllStats, GetAllCarQP } from 'src/data-layer/car/car-api.dto';
 import { MatSliderModule } from '@angular/material/slider';
 import { GearBoxType } from 'src/data-layer/car/gear-box-type.enum';
 import { EnergyType } from 'src/data-layer/car/energy-type.enum';
-import { CarComponent } from 'src/app/shared/car/car.component';
+import { CarComponent } from 'src/app/shared/cars/car/car.component';
 import { ResultAndStat } from 'src/data-layer/_shared/result-and-stat.model';
 
 @Component({
@@ -46,6 +46,8 @@ import { ResultAndStat } from 'src/data-layer/_shared/result-and-stat.model';
   styleUrls: ['./car-list.component.scss'],
 })
 export class CarListComponent implements AfterViewInit, OnDestroy {
+  @Input()
+  public isManagement = false;
   public cars: Car[] = [];
   public stats: CarGetAllStats = {
     count: 0,

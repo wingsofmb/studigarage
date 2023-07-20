@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CarApiService } from 'src/data-layer/car/car-api.service';
-import { CarListComponent } from 'src/app/shared/car-list/car-list.component';
+import { CarListComponent } from 'src/app/shared/cars/car-list/car-list.component';
 
 @Component({
   selector: 'app-car-management',
