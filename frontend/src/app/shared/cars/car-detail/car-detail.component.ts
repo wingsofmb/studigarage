@@ -13,11 +13,12 @@ import { RolesService } from 'src/app/auth/_services/roles.service';
 import { CarUpsertComponent } from 'src/app/shared/cars/car-upsert/car-upsert.component';
 import { ConfirmModalComponent } from 'src/app/shared/confirm-modal/confirm-modal.component';
 import { CarPicture } from 'src/data-layer/car/car-picture.model';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-car-detail',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule],
   providers: [CarApiService],
   templateUrl: './car-detail.component.html',
   styleUrls: ['./car-detail.component.scss'],

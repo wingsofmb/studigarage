@@ -1,8 +1,8 @@
 <ng-template [ngIf]="car">
   <div class="header">
     <h2 mat-dialog-title>Annonce n°{{ data.id }}</h2>
-    <button *ngIf="data.isManagement" mat-stroked-button class="delete-btn" (click)="deleteCar()">Suppression</button>
-    <button *ngIf="data.isManagement" mat-stroked-button class="edit-btn" (click)="updateCar()">Modification</button>
+    <button *ngIf="data.isManagement" mat-icon-button class="delete-btn" (click)="deleteCar()"><mat-icon>delete</mat-icon></button>
+    <button *ngIf="data.isManagement" mat-icon-button class="edit-btn" (click)="updateCar()"><mat-icon>edit</mat-icon></button>
   </div>
   <mat-dialog-content class="mat-typography custom-modal-content">
     <div class="picture-container">
