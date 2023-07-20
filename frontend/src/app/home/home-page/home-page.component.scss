@@ -3,6 +3,40 @@
   flex-direction: column;
   padding: 5vw;
 
+  .presentation-block {
+    @media screen and (1px <= width <= 480px) {
+      & {
+        flex-direction: column;
+
+        .main-side {
+          align-items: center;
+          margin-bottom: 12px;
+          z-index: 1;
+
+          h1,
+          h4 {
+            margin: 0;
+          }
+        }
+
+        .right-side {
+          align-items: center;
+          width: 100vw;
+          margin: 0;
+          padding: 0;
+
+          img {
+            max-width: initial;
+            width: 100%;
+            object-fit: scale-down;
+            transform: scale(1.5);
+            translate: 25px 5px;
+          }
+        }
+      }
+    }
+  }
+
   .review-block {
     flex-direction: column;
     align-items: stretch;
@@ -75,6 +109,66 @@
       width: 170px;
       max-height: 48px;
       margin: 6px auto;
+    }
+  }
+
+  @media screen and (1px <= width <= 480px) {
+    & {
+      .home-pictures {
+        object-fit: contain;
+      }
+
+      .img-vente {
+        width: 100vw;
+        height: 20vh;
+        object-fit: cover;
+        overflow: hidden;
+        translate: 20px;
+      }
+
+      .text-bloc {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 12px;
+      }
+
+      .big-title {
+        text-align: center;
+        padding: 0 5vw;
+      }
+
+      .global-review {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 30px 0;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        padding: 0 30px;
+
+        .heading {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .comment {
+          background-color: white;
+          border-radius: 6px;
+          padding: 12px;
+          margin-top: 12px;
+        }
+      }
+      
+      .review-button {
+        margin: auto;
+      }
     }
   }
 }

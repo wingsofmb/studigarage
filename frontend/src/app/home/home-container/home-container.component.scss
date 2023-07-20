@@ -1,9 +1,9 @@
 :host {
   display: block;
-  background-color: #F2E9E4;
+  background-color: #f2e9e4;
 
   .navbar-container {
-    background-color: #C9ADA7CC;
+    background-color: #c9ada7cc;
   }
 
   .navbar-icon {
@@ -19,8 +19,8 @@
 
   .home-footer {
     align-items: center;
-    background: #C9ADA7CC;
-    color: #22223B;
+    background: #c9ada7cc;
+    color: #22223b;
     border-top: 1px solid rgb(0 0 0 / 10%);
     display: flex;
     height: 80px;
@@ -53,6 +53,24 @@
         align-items: center;
         display: flex;
         margin: 3px 0;
+      }
+    }
+
+    @media screen and (1px <= width <= 480px) {
+      & {
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        padding: 12px 20px;
+
+        .contact-section {
+          margin-top: 3px;
+          
+          .contact-item {
+            margin: 0;
+          }
+        }
       }
     }
   }

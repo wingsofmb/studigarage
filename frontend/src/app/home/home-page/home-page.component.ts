@@ -10,6 +10,8 @@ import { GlobalReviewStats } from 'src/data-layer/review/review-api.dto';
 import { ScoreComponent } from 'src/app/shared/score/score.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UpsertReviewComponent } from 'src/app/shared/upsert-review/upsert-review.component';
+import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-home-page',
@@ -22,10 +24,12 @@ import { UpsertReviewComponent } from 'src/app/shared/upsert-review/upsert-revie
 export class HomePageComponent implements OnInit {
   public lastReviews: Review[] = [];
   public reviewStats: GlobalReviewStats = { amount: 0, averageScore: 0 };
+  public isXSmallBp = false;
+  public breakpoints = Breakpoints;
 
   private _destroy$: Subject<null> = new Subject<null>();
 
-  constructor(private reviewApiService: ReviewApiService, public dialog: MatDialog) {}
+  constructor(private reviewApiService: ReviewApiService, public dialog: MatDialog, private responsive: BreakpointObserver) {}
 
   public ngOnInit(): void {
     this.reviewApiService
@@ -37,6 +41,13 @@ export class HomePageComponent implements OnInit {
       .getStats()
       .pipe(takeUntil(this._destroy$))
       .subscribe((stats: GlobalReviewStats) => (this.reviewStats = stats));
+    this.responsive
+      .observe([Breakpoints.XSmall])
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((state: BreakpointState) => {
+        const matchedBp = _.keys(state.breakpoints).filter((bp) => state.breakpoints[bp])[0];
+        this.isXSmallBp = matchedBp === Breakpoints.XSmall;
+      });
   }
 
   public createReview(): void {

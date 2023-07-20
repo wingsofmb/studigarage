@@ -1,5 +1,5 @@
 <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="navbar-container">
-  <img src="assets/logo/image.png" alt="logo v parrot" height="48px" />
+  <img *ngIf="!isXSmallBp" src="assets/logo/image.png" alt="logo v parrot" height="48px" />
   <a mat-tab-link *ngFor="let tab of tabs$ | async" [active]="(activeLink$ | async) === tab.link" [routerLink]="tab.link" (click)="sendContact(tab)">
     <ng-template mat-tab-label [ngIf]="tab.icon">
       <mat-icon [fontIcon]="tab.icon" aria-hidden="false" class="navbar-icon"></mat-icon>
@@ -13,15 +13,35 @@
 <mat-tab-nav-panel #tabPanel class="main-content">
   <router-outlet />
 </mat-tab-nav-panel>
-<footer class="home-footer">
-  <div class="timetable-title">Horaires</div>
-  <div class="timetable-section">
-    <p *ngFor="let t of timetablesKeys" class="timetable-item">
-      <strong>{{ t }}: &nbsp;</strong>{{ timetables[t] }}
-    </p>
-  </div>
-  <div class="contact-section">
-    <p class="contact-item"><mat-icon style="margin-right: 6px">phone</mat-icon>Téléphone : {{ setting?.phone }}</p>
-    <p class="contact-item"><mat-icon style="margin-right: 6px">home</mat-icon>Adresse : {{ setting?.address }}</p>
-  </div>
-</footer>
+
+<!-- PHONE VERSION -->
+<ng-template [ngIf]="isXSmallBp">
+  <footer class="home-footer">
+    <div class="timetable-title">Horaires</div>
+    <div class="timetable-section">
+      <p *ngFor="let t of timetablesKeys" class="timetable-item">
+        <strong>{{ t }}: &nbsp;</strong>{{ timetables[t] }}
+      </p>
+    </div>
+    <div class="contact-section">
+      <p class="contact-item"><strong>Téléphone: </strong>&nbsp;{{ setting?.phone }}</p>
+      <p class="contact-item"><strong>Adresse: </strong>&nbsp;{{ setting?.address }}</p>
+    </div>
+  </footer>
+</ng-template>
+
+<!-- DESKTOP VERSION -->
+<ng-template [ngIf]="!isXSmallBp">
+  <footer class="home-footer">
+    <div class="timetable-title">Horaires</div>
+    <div class="timetable-section">
+      <p *ngFor="let t of timetablesKeys" class="timetable-item">
+        <strong>{{ t }}: &nbsp;</strong>{{ timetables[t] }}
+      </p>
+    </div>
+    <div class="contact-section">
+      <p class="contact-item"><mat-icon style="margin-right: 6px">phone</mat-icon>Téléphone : {{ setting?.phone }}</p>
+      <p class="contact-item"><mat-icon style="margin-right: 6px">home</mat-icon>Adresse : {{ setting?.address }}</p>
+    </div>
+  </footer>
+</ng-template>

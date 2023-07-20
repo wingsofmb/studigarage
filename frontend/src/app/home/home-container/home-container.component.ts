@@ -15,6 +15,7 @@ import { dayMapping, dayOrder } from 'src/data-layer/timetable/day-mapping.model
 import { Days } from 'src/data-layer/timetable/day.enum';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ContactFormComponent } from 'src/app/shared/contact-form/contact-form.component';
+import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home-container',
@@ -31,6 +32,8 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
   public timetables: { [key: string]: string } = {};
   public timetablesKeys: string[] = [];
   public dayMapping = dayMapping;
+  public isXSmallBp = false;
+  public breakpoints = Breakpoints;
 
   private _destroy$: Subject<null> = new Subject();
 
@@ -41,6 +44,7 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private router: Router,
     public dialog: MatDialog,
+    private responsive: BreakpointObserver,
   ) {
     const publicTabs: NavbarLink[] = [
       { link: 'home', label: 'Accueil', icon: 'home' },
@@ -57,6 +61,13 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
       map((isLogged: boolean) => (isLogged ? _.concat(publicTabs, privateTabs) : _.concat(publicTabs, authTabs))),
       takeUntil(this._destroy$),
     );
+    this.responsive
+      .observe([Breakpoints.XSmall])
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((state: BreakpointState) => {
+        const matchedBp = _.keys(state.breakpoints).filter((bp) => state.breakpoints[bp])[0];
+        this.isXSmallBp = matchedBp === Breakpoints.XSmall;
+      });
   }
 
   public ngOnInit(): void {
