@@ -19,12 +19,15 @@ export class CarComponent {
   @Input()
   public car: Car | null = null;
 
+  @Input()
+  public isManagement = false;
+
   public gearBoxMapping = gearBoxMapping;
   public energyTypeMapping = energyTypeMapping;
 
   constructor(private dialog: MatDialog) {}
 
   public seeCarDetail(): void {
-    this.dialog.open(CarDetailComponent, { data: this.car?.id });
+    this.dialog.open(CarDetailComponent, { data: { id: this.car?.id, isManagement: this.isManagement } });
   }
 }

@@ -22,4 +22,9 @@ export class RolesService {
     const role = this.getRole();
     return role === UserRoles.ADMIN;
   }
+
+  public isVisitor(): boolean {
+    const role = this.getRole();
+    return !role;
+  }
 }

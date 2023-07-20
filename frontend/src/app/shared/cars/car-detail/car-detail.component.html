@@ -1,6 +1,8 @@
-<h2 mat-dialog-title>Annonce n°{{ carId }}</h2>
-<ng-template [ngIf]="!car"></ng-template>
 <ng-template [ngIf]="car">
+  <div class="header">
+    <h2 mat-dialog-title>Annonce n°{{ data.id }}</h2>
+    <button *ngIf="data.isManagement" mat-stroked-button class="edit-btn" (click)="updateCar()">Modification</button>
+  </div>
   <mat-dialog-content class="mat-typography custom-modal-content">
     <div class="picture-container">
       <img class="main-picture mat-elevation-z4" [src]="mainPicture" alt="image de la voiture" />
@@ -27,7 +29,7 @@
         <div class="grid-item left" style="grid-column: 1; grid-row: 3">Prix</div>
         <div class="grid-item right" style="grid-column: 2; grid-row: 3">{{ car.price }}€</div>
         <div class="grid-item left" style="grid-column: 1; grid-row: 4">Mise en circulation</div>
-        <div class="grid-item right" style="grid-column: 2; grid-row: 4">{{ car.firstCirculationDate | date : 'short' }}</div>
+        <div class="grid-item right" style="grid-column: 2; grid-row: 4">{{ car.firstCirculationDate | date : 'MM/yyyy' }}</div>
         <div class="grid-item left" style="grid-column: 1; grid-row: 5">Kilométrage</div>
         <div class="grid-item right" style="grid-column: 2; grid-row: 5">{{ car.mileage }}</div>
         <div class="grid-item left" style="grid-column: 1; grid-row: 6">Type de moteur</div>

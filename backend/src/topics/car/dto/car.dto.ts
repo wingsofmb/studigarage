@@ -1,5 +1,5 @@
 import { EnergyType, GearBoxType } from '@prisma/client';
-import { IsString, IsEnum, IsInt, Min, IsDate } from 'class-validator';
+import { IsString, IsEnum, IsInt, Min, IsDateString } from 'class-validator';
 
 export class CreateCarInputDto {
   @IsString()
@@ -12,7 +12,7 @@ export class CreateCarInputDto {
   @Min(0)
   price: number;
 
-  @IsDate()
+  @IsDateString()
   firstCirculationDate: string;
 
   @IsInt()

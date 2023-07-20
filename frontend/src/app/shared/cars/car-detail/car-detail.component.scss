@@ -6,15 +6,35 @@
   min-height: 79vh;
   height: 100%;
 
+  .header {
+    display: flex;
+    align-items: center;
+
+    .edit-btn {
+      margin: 0 24px 0 auto;
+    }
+  }
 
   .custom-modal-content {
     display: flex;
     flex-direction: row;
 
+    @media screen and (1px <= width <= 480px) {
+      & {
+        flex-direction: column;
+      }
+    }
+
     .picture-container {
       flex-grow: 1;
       max-width: 50%;
       padding: 6px;
+
+      @media screen and (1px <= width <= 480px) {
+        & {
+          max-width: 100%;
+        }
+      }
 
       .main-picture {
         width: 100%;
@@ -35,7 +55,7 @@
         }
       }
     }
-  
+
     .car-detail-container {
       display: flex;
       max-width: 50%;
@@ -43,15 +63,24 @@
       padding: 6px;
       flex-direction: column;
       color: rgb(0 0 0 / 80%);
-  
+
+      @media screen and (1px <= width <= 480px) {
+        & {
+          max-width: 100%;
+        }
+      }
+
       .grid-layout {
         display: grid;
         grid-template-columns: repeat(2, 50%);
         grid-template-rows: repeat(9, 30px);
-        border: 1px solid #4A4E69;
+        border: 1px solid #4a4e69;
 
         .grid-item {
           padding: 3px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-wrap: nowrap;
 
           &.left {
             font-weight: 500;
@@ -61,9 +90,6 @@
 
           &.right {
             color: rgb(0 0 0 / 60%);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-wrap: nowrap;
           }
         }
       }

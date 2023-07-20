@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>{{ isCreation ? 'Ajouter une annonce' : "Modifier l'annonce n°" + data?.id }}</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="formGroup" class="form-container">
+    <!-- brand Column -->
+    <mat-form-field class="input-fields half">
+      <mat-label>Marque</mat-label>
+      <input type="text" matInput formControlName="brand" cdkFocusInitial />
+      <mat-error *ngIf="formGroup.controls.brand.hasError('required')"> La marque est <strong>requise</strong></mat-error>
+    </mat-form-field>
+
+    <!-- firstCirculationDate Column -->
+    <mat-form-field class="input-fields half">
+      <mat-label>Date de première mise en circulation</mat-label>
+      <input matInput [matDatepicker]="dp" formControlName="firstCirculationDate" />
+      <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)" panelClass="example-month-picker"> </mat-datepicker>
+      <mat-error *ngIf="formGroup.controls.firstCirculationDate.hasError('required')"> La date est <strong>requise</strong></mat-error>
+    </mat-form-field>
+
+    <!-- model Column -->
+    <mat-form-field class="input-fields">
+      <mat-label>Modèle</mat-label>
+      <input type="text" matInput formControlName="model" />
+      <mat-error *ngIf="formGroup.controls.model.hasError('required')"> Le modèle est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <!-- price Column -->
+    <mat-form-field class="input-fields half">
+      <mat-label>Prix</mat-label>
+      <input type="number" matInput formControlName="price" />
+      <mat-error *ngIf="formGroup.controls.price.hasError('required')"> Un prix est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <!-- mileage Column -->
+    <mat-form-field class="input-fields half">
+      <mat-label>Kilométrage</mat-label>
+      <input type="number" matInput formControlName="mileage" />
+      <mat-error *ngIf="formGroup.controls.mileage.hasError('required')"> Le Kilométrage est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <!-- gearBox Column -->
+    <mat-form-field class="input-fields half">
+      <mat-label>Type de Boîte</mat-label>
+      <mat-select [formControl]="formGroup.controls.gearBox" required>
+        <mat-option *ngFor="let gearBox of gearBoxKeys" [value]="gearBox">
+          {{ gearBoxMapping[gearBox] }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formGroup.controls.gearBox.hasError('required')"> Le type de boîte est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <!-- energy Column -->
+    <mat-form-field class="input-fields half">
+      <mat-label>Type de Moteur</mat-label>
+      <mat-select [formControl]="formGroup.controls.energy" required>
+        <mat-option *ngFor="let energy of energyTypeKeys" [value]="energy">
+          {{ energyTypeMapping[energy] }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formGroup.controls.energy.hasError('required')"> Le type de moteur est <strong>requis</strong></mat-error>
+    </mat-form-field>
+
+    <!-- outsideColor Column -->
+    <mat-form-field class="input-fields half">
+      <mat-label>Couleur de carrosserie</mat-label>
+      <input type="text" matInput formControlName="outsideColor" />
+      <mat-error *ngIf="formGroup.controls.outsideColor.hasError('required')"> La couleur est <strong>requise</strong></mat-error>
+    </mat-form-field>
+
+    <!-- insideColor Column -->
+    <mat-form-field class="input-fields half">
+      <mat-label>Couleur de sellerie</mat-label>
+      <input type="text" matInput formControlName="insideColor" />
+      <mat-error *ngIf="formGroup.controls.insideColor.hasError('required')"> La couleur est <strong>requise</strong></mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <mat-error *ngIf="errorCode === 400" class="error-msg">Informations incorrectes</mat-error>
+  <button mat-flat-button mat-dialog-close>Annuler</button>
+  <button mat-flat-button color="primary" [disabled]="!formGroup.valid" (click)="saveForm()">{{ isCreation ? 'Ajouter' : 'Modifier' }}</button>
+</mat-dialog-actions>

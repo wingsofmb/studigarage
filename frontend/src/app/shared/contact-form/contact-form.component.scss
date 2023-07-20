@@ -3,6 +3,12 @@
   flex-direction: column;
   width: 70vw;
   height: 85vh;
+  
+  @media screen and (1px <= width <= 480px) {
+    & {
+      align-items: center;
+    }
+  }
 
   .form-container {
     background-color: white;
@@ -13,6 +19,14 @@
     grid-template-rows: repeat(12, 8.333%);
     margin-bottom: 28px;
     padding: 32px;
+
+    @media screen and (1px <= width <= 480px) {
+      & {
+        grid-template-columns: repeat(1, 100%);
+        grid-template-rows: repeat(14, 8.333%);
+        padding: 12px 0;
+      }
+    }
 
     .title {
       margin: 6px 0 28px;

@@ -48,6 +48,12 @@ import { ResultAndStat } from 'src/data-layer/_shared/result-and-stat.model';
 export class CarListComponent implements AfterViewInit, OnDestroy {
   @Input()
   public isManagement = false;
+
+  @Input()
+  public set refreshRandom(value: number) {
+    this.refresh$.next(null);
+  }
+
   public cars: Car[] = [];
   public stats: CarGetAllStats = {
     count: 0,

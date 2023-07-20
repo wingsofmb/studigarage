@@ -1,6 +1,12 @@
 :host {
   display: flex;
   flex-direction: row;
+
+  @media screen and (1px <= width <= 480px) {
+    & {
+      flex-direction: column;
+    }
+  }
   
   .filter-section {
     display: flex;
@@ -13,8 +19,10 @@
     background-color: white;
     border-radius: 6px;
 
-    * {
-      // outline: 1px solid red;
+    @media screen and (1px <= width <= 480px) {
+      & {
+        margin: auto;
+      }
     }
 
     .new-filter {
@@ -32,6 +40,12 @@
       flex-flow: wrap;
       flex-direction: row;
       flex-grow: 1;
+
+      @media screen and (1px <= width <= 480px) {
+        & {
+          justify-content: center;
+        }
+      }
     }
   }
 

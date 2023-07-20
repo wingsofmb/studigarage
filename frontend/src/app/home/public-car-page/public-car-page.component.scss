@@ -3,4 +3,10 @@
   flex-direction: column;
   padding: 5vw;
   min-width: 90vw;
+
+  @media screen and (1px <= width <= 480px) {
+    & {
+      align-items: center;
+    }
+  }
 }

@@ -10,6 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { mailToService } from 'src/app/shared/_services/mailTo.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-contact-form',
@@ -40,16 +43,28 @@ export class ContactFormComponent {
     phone: new FormControl('+33', [Validators.required, Validators.pattern(/\+\d{2}( )?(\d( )?){9}/)]),
     content: new FormControl('', [Validators.required]),
   });
+  public isXSmallBp = false;
+  public breakpoints = Breakpoints;
+
+  private _destroy$: Subject<null> = new Subject();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: string | null,
     public dialogRef: MatDialogRef<ContactFormComponent>,
     private mailToService: mailToService,
     private snackBar: MatSnackBar,
+    private responsive: BreakpointObserver,
   ) {
     if (this.data) {
       this.formGroup.controls.subject.setValue(this.data);
     }
+    this.responsive
+      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large])
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((state: BreakpointState) => {
+        const matchedBp = _.keys(state.breakpoints).filter((bp) => state.breakpoints[bp])[0];
+        this.isXSmallBp = matchedBp === Breakpoints.XSmall;
+      });
   }
 
   public saveForm(): void {

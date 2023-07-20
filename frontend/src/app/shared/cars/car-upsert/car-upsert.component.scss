@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 70vw;
+  width: 100%;
+  min-height: 79vh;
+  height: 100%;
+
+  .form-container {
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding: 32px;
+
+    .half {
+      width: 45%;
+
+      @media screen and (1px <= width <= 480px) {
+        & {
+          width: 100%;
+        }
+      }
+    }
+
+    .title {
+      margin: 6px 0 28px;
+    }
+  }
+
+  .custom-form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .input-fields {
+    margin: 6px 0;
+    width: 100%;
+  }
+}
+

@@ -27,11 +27,23 @@
 
       .spacer {
         flex-grow: 1;
+        
+        @media screen and (1px <= width <= 480px) {
+          & {
+            flex-grow: 0;
+          }
+        }
       }
 
       .create-btn {
         display: block;
         margin-left: auto;
+       
+        @media screen and (1px <= width <= 480px) {
+          & {
+            margin-right: auto;
+          }
+        }
       }
     }
   }
