@@ -2,6 +2,13 @@
   display: flex;
   flex-direction: column;
   width: 500px;
+  
+  @media screen and (1px <= width <= 480px) {
+    & {
+      width: 80vw;
+      height: 70vh;;
+    }
+  }
 
   .form-container {
     background-color: white;
@@ -10,9 +17,23 @@
     flex-direction: column;
     padding: 32px;
 
+    @media screen and (1px <= width <= 480px) {
+      & {
+        flex-direction: column;
+        padding: 12px;
+        align-items: stretch;
+      }
+    }
+
     .upper-row {
       display: flex;
       flex-direction: row;
+
+      @media screen and (1px <= width <= 480px) {
+        & {
+          flex-direction: column;
+        }
+      }
     }
 
     .title {
@@ -21,6 +42,12 @@
 
     .textarea-field {
       flex-grow: 1;
+
+      @media screen and (1px <= width <= 480px) {
+        & {
+          min-height: 30vh;
+        }
+      }
     }
 
     .score-field {
